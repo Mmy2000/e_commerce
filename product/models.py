@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify 
-
+from django.utils.translation import gettext_lazy as _
 
 
 # Create your models here.
@@ -29,6 +29,8 @@ class Product(models.Model):
     price = models.IntegerField(default=0)
     description = models.TextField(max_length=10000)
     created_at = models.DateTimeField( default=timezone.now)
+    category = models.ForeignKey('ProductCategory',related_name='product_category',verbose_name=('category'), blank=True, null=True,on_delete=models.CASCADE)
+    PRDBrand = models.ForeignKey('settings.Brand' , on_delete=models.CASCADE , blank=True, null=True ,verbose_name=_("Brand "))
     #size = models.CharField( choices=Size , max_length=100)
     #color = models.CharField( choices=Color , max_length=100)
     slug = models.SlugField(null=True,blank=True)
