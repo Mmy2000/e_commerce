@@ -16,7 +16,7 @@ class Product(models.Model):
     discount = models.DecimalField(max_digits=5  , decimal_places=2,default=0)
     description = models.TextField(max_length=10000)
     created_at = models.DateTimeField( default=timezone.now)
-    category = models.ForeignKey('ProductCategory',related_name='product_category',verbose_name=('category'), blank=True, null=True,on_delete=models.CASCADE)
+    category = models.ManyToManyField('ProductCategory',related_name='product_category',verbose_name=('category'), blank=True, null=True)
     PRDBrand = models.ForeignKey('settings.Brand' , on_delete=models.CASCADE , blank=True, null=True ,verbose_name=_("Brand "))
     color = models.ManyToManyField('Color',related_name='product_color',null=True,blank=True)
     size = models.ManyToManyField('Size',related_name='product_size',null=True,blank=True)

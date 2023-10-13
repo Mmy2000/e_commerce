@@ -21,6 +21,14 @@ class ProductList(ListView):
         context["colors"] = Color.objects.all().annotate(product_count=Count('product_color'))
 
         return context
+    
+    def get_queryset(self) :
+        name = self.request.GET.get('q','')
+        object_list = Product.objects.filter(
+            Q(name__icontains = name) |
+            Q(description__icontains = name)
+        )
+        return object_list
 
 
 class ProductByCategory(ListView):
