@@ -35,6 +35,8 @@ class ProductList(ListView):
 
 class ProductByCategory(ListView):
     model = Product
+    template_name = 'product/home_search.html'
+
 
     def get_queryset(self) :
         slug = self.kwargs['slug']

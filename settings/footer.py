@@ -1,6 +1,8 @@
 from .models import Info 
-from product.models import ProductCategory
+from product.models import ProductCategory ,Product
 from django.db.models import Count
+from django.shortcuts import render
+from django.db.models.query_utils import Q
 
 
 def myfooter(request):
@@ -11,3 +13,11 @@ def myfooter(request):
         'categories_footer':categories_footer,
         }
     return(context)
+
+def home_search(request):
+    name = request.GET.get('name')
+
+    product_list = Product.objects.filter(
+        Q(name__icontains = name)
+    )
+    return render(request , 'settings/home_search.html' , {'product_list':product_list})
