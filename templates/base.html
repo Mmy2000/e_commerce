@@ -74,11 +74,13 @@
                     id="navbar-vertical">
                     <div class="navbar-nav w-100 overflow-hidden" style="height: 300px">
                         <div class="nav-item dropdown">
-                        {% for category in categories  %}
-                        <a href="{% url 'product:product_by_category' category %}" class="nav-item nav-link">{{category}}</a>
-                        {% endfor %}
-                    </div>
-                <a href="{% url 'settings:category_list'  %}" ><button type="button" class="btn btn-primary">Show More</button></a>
+                            {% for category in categories_footer  %}
+                            <a href="{% url 'product:product_by_category' category %}"
+                                class="nav-item nav-link">{{category}}</a>
+                            {% endfor %}
+                        </div>
+                    <a href="{% url 'settings:category_list'  %}"><button type="button" class="btn btn-primary">Show
+                                More</button></a>
                 </nav>
             </div>
             <div class="col-lg-9">
@@ -100,7 +102,8 @@
                                     <a href="cart.html" class="dropdown-item">Shopping Cart</a>
                                     <a href="checkout.html" class="dropdown-item">Checkout</a>
                                 </div>
-                            </div>                            <div class="nav-item dropdown">
+                            </div>
+                            <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu rounded-0 m-0">
                                     <a href="cart.html" class="dropdown-item">Shopping Cart</a>
@@ -120,8 +123,8 @@
         </div>
     </div>
 
-{% block body %}
-{% endblock body %}
+    {% block body %}
+    {% endblock body %}
 
 
     <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
@@ -129,7 +132,8 @@
             <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                 <a href="" class="text-decoration-none">
                     <h1 class="mb-4 display-5 font-weight-semi-bold"><span
-                            class="text-primary font-weight-bold border border-white px-3 mr-1">E</span>{{myfooter.site_name}}</h1>
+                            class="text-primary font-weight-bold border border-white px-3 mr-1">E</span>{{myfooter.site_name}}
+                    </h1>
                 </a>
                 <p>{{myfooter.description}}</p>
                 <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>{{myfooter.address}}</p>
@@ -143,7 +147,8 @@
                         <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
                         <div class="d-flex flex-column justify-content-start">
                             <a class="text-dark mb-2" href="/"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                            <a class="text-dark mb-2" href="{% url 'product:product_list'%}"><i class="fa fa-angle-right mr-2"></i>Our
+                            <a class="text-dark mb-2" href="{% url 'product:product_list'%}"><i
+                                    class="fa fa-angle-right mr-2"></i>Our
                                 Shop</a>
                             <a class="text-dark mb-2" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Shop
                                 Detail</a>
@@ -213,7 +218,8 @@
         <div class="row border-top border-light mx-xl-5 py-4">
             <div class="col-md-6 px-xl-0">
                 <p class="mb-md-0 text-center text-md-left text-dark">
-                    &copy; <a class="text-dark font-weight-semi-bold" href="#">{{myfooter.site_name}}</a>. All Rights Reserved.
+                    &copy; <a class="text-dark font-weight-semi-bold" href="#">{{myfooter.site_name}}</a>. All Rights
+                    Reserved.
                     Designed
                     by
                     <a class="text-dark font-weight-semi-bold" href="https://htmlcodex.com">HTML Codex</a><br>
