@@ -17,7 +17,7 @@ class Product(models.Model):
     description = models.TextField(max_length=10000)
     created_at = models.DateTimeField( default=timezone.now)
     category = models.ForeignKey('ProductCategory',related_name='product_category',verbose_name=('category'),  null=True,on_delete=models.CASCADE)
-    PRDBrand = models.ForeignKey('settings.Brand' , on_delete=models.CASCADE , blank=True, null=True ,verbose_name=_("Brand "))
+    PRDBrand = models.ForeignKey('settings.Brand' ,related_name='product_brand', on_delete=models.CASCADE , blank=True, null=True ,verbose_name=_("Brand "))
     color = models.ManyToManyField('Color',related_name='product_color',null=True,blank=True)
     size = models.ManyToManyField('Size',related_name='product_size',null=True,blank=True)
     slug = models.SlugField(null=True,blank=True)

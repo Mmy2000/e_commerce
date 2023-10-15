@@ -44,6 +44,18 @@ class ProductByCategory(ListView):
             Q(category__name__icontains = slug)
         )
         return object_list
+    
+class ProductByBrand(ListView):
+    model = Product
+    template_name = 'product/home_search.html'
+
+
+    def get_queryset(self) :
+        slug = self.kwargs['slug']
+        object_list = Product.objects.filter(
+            Q(PRDBrand__BRDName__icontains = slug)
+        )
+        return object_list
 
 class ProductByColor(ListView):
     model = Product
