@@ -16,8 +16,7 @@ class Product(models.Model):
     discount = models.DecimalField(max_digits=5  , decimal_places=2,default=0)
     description = models.TextField(max_length=10000)
     created_at = models.DateTimeField( default=timezone.now)
-    category = models.ForeignKey('ProductCategory',related_name='product_category',verbose_name=('category'),  null=True, on_delete=models.CASCADE)
-    subcategory = models.ForeignKey('ProductSubCategory',related_name='product_subcategory',verbose_name=('subcategory'),  null=True, on_delete=models.CASCADE)
+    category = models.ManyToManyField('ProductCategory',related_name='product_category',verbose_name=('category'),  null=True)
     PRDBrand = models.ForeignKey('settings.Brand' ,related_name='product_brand', on_delete=models.CASCADE , blank=True, null=True ,verbose_name=_("Brand "))
     color = models.ManyToManyField('Color',related_name='product_color',null=True,blank=True)
     size = models.ManyToManyField('Size',related_name='product_size',null=True,blank=True)
@@ -48,12 +47,6 @@ class ProductCategory(models.Model):
     def __str__(self):
         return self.name
     
-class ProductSubCategory(models.Model):
-    name = models.CharField(max_length=60)
-    image = models.ImageField(upload_to='subcategoryimages/')
-
-    def __str__(self):
-        return self.name
 
 class Product_Alternative(models.Model):
     PALNProduct = models.ForeignKey(Product , on_delete=models.CASCADE , related_name='main_prodcut' , verbose_name=("Product"))
