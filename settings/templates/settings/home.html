@@ -10,7 +10,7 @@
                 <div class="p-3" style="max-width: 700px;">
                     <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order</h4>
                     <h3 class="display-4 text-white font-weight-semi-bold mb-4">Fashionable Dress</h3>
-                    <a href="" class="btn btn-light py-2 px-3">Shop Now</a>
+                    <a href="{%url 'product:product_list'%}" class="btn btn-light py-2 px-3">Shop Now</a>
                 </div>
             </div>
         </div>
@@ -75,7 +75,7 @@
         {% for category in categories_home %}
         <div class="col-lg-4 col-md-6 pb-1">
             <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-                <p class="text-right">{{category.product_count}}</p>
+                <p class="text-right">{{category.product_count}}&nbsp;product</p>
                 <a href="{%url 'product:product_by_category' category %}"
                     class="cat-img position-relative overflow-hidden mb-3">
                     <img class="img-fluid" src="{{category.image.url}}" alt="">

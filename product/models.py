@@ -13,13 +13,13 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='product/')
     price = models.IntegerField(default=0)
-    discount = models.DecimalField(max_digits=5  , decimal_places=2,default=0)
+    discount = models.IntegerField(default=0)
     description = models.TextField(max_length=10000)
     created_at = models.DateTimeField( default=timezone.now)
-    category = models.ManyToManyField('ProductCategory',related_name='product_category',verbose_name=('category'),  null=True)
+    category = models.ManyToManyField('ProductCategory',related_name='product_category',verbose_name=('category'),  default="")
     PRDBrand = models.ForeignKey('settings.Brand' ,related_name='product_brand', on_delete=models.CASCADE , blank=True, null=True ,verbose_name=_("Brand "))
-    color = models.ManyToManyField('Color',related_name='product_color',null=True,blank=True)
-    size = models.ManyToManyField('Size',related_name='product_size',null=True,blank=True)
+    color = models.ManyToManyField('Color',related_name='product_color',default="")
+    size = models.ManyToManyField('Size',related_name='product_size',default="")
     slug = models.SlugField(null=True,blank=True)
 
     def save(self,*args, **kwargs):
