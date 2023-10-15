@@ -59,6 +59,8 @@ class ProductByBrand(ListView):
 
 class ProductByColor(ListView):
     model = Product
+    template_name = 'product/home_search.html'
+
 
     def get_queryset(self) :
         slug = self.kwargs['slug']
@@ -68,6 +70,8 @@ class ProductByColor(ListView):
         return object_list
 class ProductBysize(ListView):
     model = Product
+    template_name = 'product/home_search.html'
+
 
     def get_queryset(self) :
         slug = self.kwargs['slug']
