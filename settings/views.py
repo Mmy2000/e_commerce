@@ -7,9 +7,6 @@ from django.db.models import Count
 from .models import  NewsLitter , Brand
 from django.http import JsonResponse
 
-
-
-
 # Create your views here.
 def home(request):
     categories_home = ProductCategory.objects.filter().annotate(product_count=Count('product_category'))[:6] 
@@ -21,6 +18,14 @@ def home(request):
         'product':product ,
         'product_just_arrived':product_just_arrived,
     })
+
+def home_search(request):
+    name = request.GET.get('name')
+
+    product_list = Product.objects.filter(
+        Q(name__icontains = name) 
+    )
+    return render(request , 'product/home_search.html' , {'product_list':product_list})
 
 
 class CategoryList(ListView):

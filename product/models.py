@@ -48,30 +48,6 @@ class ProductCategory(models.Model):
         return self.name
     
 
-class Product_Alternative(models.Model):
-    PALNProduct = models.ForeignKey(Product , on_delete=models.CASCADE , related_name='main_prodcut' , verbose_name=("Product"))
-    PALNAlternatives = models.ManyToManyField(Product , related_name='alternative_products'  , verbose_name=("Alternatives"))
-    
-    class Meta:
-        verbose_name = ("Product Alternative")
-        verbose_name_plural = ("Product Alternatives")
-
-    def __str__(self):
-        return str(self.PALNProduct)
-
-
-class Product_Accessories(models.Model):
-    PACCProduct = models.ForeignKey(Product , on_delete=models.CASCADE , related_name='mainAccessory_prodcut' , verbose_name=("Product"))
-    PACCAlternatives = models.ManyToManyField(Product , related_name='accessories_products' , verbose_name=("Accessories"))
-      
-    class Meta:
-        verbose_name = ("Product Accessory")
-        verbose_name_plural = ("Product Accessories")
-
-    def __str__(self):
-        return str(self.PACCProduct)
-    
-
 
 class Color(models.Model):
     name = models.CharField(max_length=50 )

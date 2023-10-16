@@ -36,6 +36,18 @@
                             class="text-primary font-weight-bold border px-3 mr-1">E</span>{{myfooter.site_name}}</h1>
                 </a>
             </div>
+            <div class="col-lg-6 col-6 text-left">
+                <form action="{% url 'home:home_search' %}"   method="GET">
+                    <div class="input-group">
+                        <input type="text" name="name" class="form-control" placeholder="Search for products">
+                        <div class="input-group-append">
+                            <span class="input-group-text bg-transparent text-primary">
+                                <i class="fa fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <div class="col-lg-3 col-6 text-right">
                 <a href="" class="btn border">
                     <i class="fas fa-heart text-primary"></i>
@@ -167,7 +179,7 @@
                     <div class="col-md-4 mb-5">
                         <h5 class="font-weight-bold text-dark mb-4">Categories</h5>
                         <div class="d-flex flex-column justify-content-start">
-                            {% for category in categories_home %}
+                            {% for category in categories_footer %}
                             <a class="text-dark mb-2" href="{% url 'product:product_by_category' category %}"><i
                                     class="fa fa-angle-right mr-2"></i>{{category}}</a>
                             {% endfor %}
@@ -183,8 +195,9 @@
                             <a class="text-dark mb-2" href="{%url 'product:product_by_brand' brand%}"><i
                                     class="fa fa-angle-right mr-2"></i>{{brand}}</a>
                             {% endfor %}
-                                                    <a href="{% url 'settings:brand_list'  %}"><button type="button"  class="btn btn-primary">Show
-                                More</button></a>
+                            <a href="{% url 'settings:brand_list'  %}"><button type="button"
+                                    class="btn btn-primary">Show
+                                    More</button></a>
                         </div>
                     </div>
                     <div id="main_form_div" class="col-md-4 mb-5">

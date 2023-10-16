@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView , DetailView
 from .models import Product
-from .models import  ProductCategory , Color, Size , Product_Accessories
+from .models import  ProductCategory , Color, Size 
 from django.db.models import Count
 from django_filters.views import FilterView
 from . filters import ProductFilter
