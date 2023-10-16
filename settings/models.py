@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -40,3 +41,18 @@ class Info(models.Model):
 
     def __str__(self):
         return self.site_name
+    
+
+
+class NewsLitter(models.Model):
+    email = models.EmailField( max_length=254)
+    name = models.CharField(max_length=50,null=True, blank=True)
+    created_at = models.DateTimeField(default=timezone.now())
+    
+
+    class Meta:
+        verbose_name = ("NewsLitter")
+        verbose_name_plural = ("NewsLitter")
+
+    def __str__(self):
+        return self.name

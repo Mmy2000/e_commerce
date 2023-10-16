@@ -67,7 +67,7 @@
                                 class="nav-item nav-link">{{category}}</a>
                             {% endfor %}
                         </div>
-                    <a href="{% url 'settings:category_list'  %}"><button type="button" class="btn btn-primary">Show
+                        <a href="{% url 'settings:category_list'  %}"><button type="button" class="btn btn-primary">Show
                                 More</button></a>
                 </nav>
             </div>
@@ -88,7 +88,8 @@
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Brand</a>
                                 <div class="dropdown-menu rounded-0 m-0">
                                     {% for brand in brands_footer %}
-                                    <a href="{%url 'product:product_by_brand' brand%}" class="dropdown-item">{{brand}}</a>
+                                    <a href="{%url 'product:product_by_brand' brand%}"
+                                        class="dropdown-item">{{brand}}</a>
                                     {% endfor %}
                                 </div>
                             </div>
@@ -100,6 +101,44 @@
                         </div>
                     </div>
                 </nav>
+                <div id="header-carousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" style="height: 410px;">
+                            <img class="img-fluid" src="{% static 'img4/carousel-1.jpg'%}" alt="Image">
+                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                <div class="p-3" style="max-width: 700px;">
+                                    <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First
+                                        Order</h4>
+                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4">Fashionable Dress</h3>
+                                    <a href="{%url 'product:product_list'%}" class="btn btn-light py-2 px-3">Shop
+                                        Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item" style="height: 410px;">
+                            <img class="img-fluid" src="{% static 'img4/carousel-2.jpg'%}" alt="Image">
+                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                <div class="p-3" style="max-width: 700px;">
+                                    <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First
+                                        Order</h4>
+                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4">Reasonable Price</h3>
+                                    <a href="{%url 'product:product_list'%}" class="btn btn-light py-2 px-3">Shop
+                                        Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+                        <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                            <span class="carousel-control-prev-icon mb-n2"></span>
+                        </div>
+                    </a>
+                    <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+                        <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                            <span class="carousel-control-next-icon mb-n2"></span>
+                        </div>
+                    </a>
+                </div>
 
             </div>
         </div>
@@ -126,54 +165,40 @@
             <div class="col-lg-8 col-md-12">
                 <div class="row">
                     <div class="col-md-4 mb-5">
-                        <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
+                        <h5 class="font-weight-bold text-dark mb-4">Categories</h5>
                         <div class="d-flex flex-column justify-content-start">
-                            <a class="text-dark mb-2" href="/"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                            <a class="text-dark mb-2" href="{% url 'product:product_list'%}"><i
-                                    class="fa fa-angle-right mr-2"></i>Our
-                                Shop</a>
-                            <a class="text-dark mb-2" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Shop
-                                Detail</a>
-                            <a class="text-dark mb-2" href="cart.html"><i class="fa fa-angle-right mr-2"></i>Shopping
-                                Cart</a>
-                            <a class="text-dark mb-2" href="checkout.html"><i
-                                    class="fa fa-angle-right mr-2"></i>Checkout</a>
-                            <a class="text-dark" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contact
-                                Us</a>
+                            {% for category in categories_home %}
+                            <a class="text-dark mb-2" href="{% url 'product:product_by_category' category %}"><i
+                                    class="fa fa-angle-right mr-2"></i>{{category}}</a>
+                            {% endfor %}
                         </div>
                     </div>
                     <div class="col-md-4 mb-5">
-                        <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
+                        <h5 class="font-weight-bold text-dark mb-4">Brand</h5>
                         <div class="d-flex flex-column justify-content-start">
-                            <a class="text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                            <a class="text-dark mb-2" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Our
-                                Shop</a>
-                            <a class="text-dark mb-2" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Shop
-                                Detail</a>
-                            <a class="text-dark mb-2" href="cart.html"><i class="fa fa-angle-right mr-2"></i>Shopping
-                                Cart</a>
-                            <a class="text-dark mb-2" href="checkout.html"><i
-                                    class="fa fa-angle-right mr-2"></i>Checkout</a>
-                            <a class="text-dark" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contact
-                                Us</a>
+                            {% for brand in brands_footer  %}
+                            <a class="text-dark mb-2" href="{%url 'product:product_by_brand' brand%}"><i
+                                    class="fa fa-angle-right mr-2"></i>{{brand}}</a>
+                            {% endfor %}
                         </div>
                     </div>
-                    <div class="col-md-4 mb-5">
+                    <div id="main_form_div" class="col-md-4 mb-5">
                         <h5 class="font-weight-bold text-dark mb-4">Newsletter</h5>
-                        <form action="">
+                        <form id="newsletters_form" action="{% url 'home:newsletter' %}  method="POST"">
+                                                        {% csrf_token %}
                             <div class="form-group">
-                                <input type="text" class="form-control border-0 py-4" placeholder="Your Name"
-                                    required="required" />
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control border-0 py-4" placeholder="Your Email"
-                                    required="required" />
+                                <input type="email" name="emailinput" class="form-control border-0 py-4"
+                                    placeholder="Your Email" required="required" />
                             </div>
                             <div>
                                 <button class="btn btn-primary btn-block border-0 py-3" type="submit">Subscribe
                                     Now</button>
                             </div>
                         </form>
+                    </div>
+                    <div id="main_form_div" class="col-md-4 mb-5">
+                        <h5 id="success_div" style="display: none;" class="font-weight-bold text-dark mb-4">Subcribed
+                            Successfuly</h5>
                     </div>
                     <div class="col-lg-6 text-center text-lg-right">
                         <div class="d-inline-flex align-items-center">
@@ -200,7 +225,8 @@
         <div class="row border-top border-light mx-xl-5 py-4">
             <div class="col-md-6 px-xl-0">
                 <p class="mb-md-0 text-center text-md-left text-dark">
-                    &copy; <a class="text-dark font-weight-semi-bold" href="#">{{myfooter.site_name}}</a>. All Rights
+                    &copy; <a class="text-dark font-weight-semi-bold" href="#">{{myfooter.site_name}}</a>. All
+                    Rights
                     Reserved.
                     Designed
                     by
@@ -232,6 +258,23 @@
 
     <!-- Template Javascript -->
     <script src="{% static 'js4/main.js'%}"></script>
+    <script>
+        $("#newsletters_form").submit(function (e) {
+            e.preventDefault();
+            var form = $(this);
+            var url = form.attr('action');
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(),
+                success: function (data) {
+                    document.getElementById('main_form_div').style.display = "none";
+                    document.getElementById('success_div').style.display = "block";
+                }
+            })
+        })
+    </script>
 </body>
 
 </html>

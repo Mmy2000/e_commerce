@@ -1,8 +1,7 @@
 from .models import Info , Brand
 from product.models import ProductCategory ,Product
 from django.db.models import Count
-from django.shortcuts import render
-from django.db.models.query_utils import Q
+
 
 
 def myfooter(request):
@@ -15,3 +14,4 @@ def myfooter(request):
         'brands_footer':brands_footer,
         }
     return(context)
+
