@@ -1,7 +1,20 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load django_bootstrap5 %}
 {% block body %}
+<style>
+    .button_style {
+        margin: auto;
+    }
+    .button_style1 {
+        text-align: center;  
 
+    }
+    .button_style2 {
+        text-align: center;  
+
+    }
+</style>
 
 
 <!-- Featured Start -->
@@ -51,6 +64,10 @@
             </div>
         </div>
         {% endfor %}
+        <div class="button_style">
+            <a href="{% url 'settings:category_list'  %}">
+                {% bootstrap_button button_type="submit" content="See All Categories" %}</a>
+        </div>
     </div>
 </div>
 <!-- Categories End -->
@@ -114,6 +131,10 @@
         </div>
         {% endfor %}
     </div>
+    <div class="button_style1">
+        <a href="{% url 'product:product_list'  %}">
+            {% bootstrap_button button_type="submit" content="See All Product" %}</a>
+    </div>
 </div>
 <!-- Products End -->
 
@@ -170,6 +191,10 @@
             </div>
         </div>
         {% endfor %}
+    </div>
+    <div class="button_style2">
+        <a href="{% url 'product:product_list'  %}">
+            {% bootstrap_button button_type="submit" content="See All Product" %}</a>
     </div>
 </div>
 <!-- Products End -->
