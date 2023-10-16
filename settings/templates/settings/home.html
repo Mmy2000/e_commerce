@@ -4,15 +4,15 @@
 {% block body %}
 <style>
     .button_style {
-        margin: auto;
+        text-align: center;
     }
+
     .button_style1 {
-        text-align: center;  
-
+        text-align: center;
     }
-    .button_style2 {
-        text-align: center;  
 
+    .button_style2 {
+        text-align: center;
     }
 </style>
 
@@ -64,10 +64,10 @@
             </div>
         </div>
         {% endfor %}
-        <div class="button_style">
-            <a href="{% url 'settings:category_list'  %}">
-                {% bootstrap_button button_type="submit" content="See All Categories" %}</a>
-        </div>
+    </div>
+    <div class="button_style">
+        <a href="{% url 'settings:category_list'  %}">
+            {% bootstrap_button button_type="submit" content="See All Categories" %}</a>
     </div>
 </div>
 <!-- Categories End -->
@@ -82,7 +82,8 @@
                 <div class="position-relative" style="z-index: 1;">
                     <h5 class="text-uppercase text-primary mb-3">20% off the all order</h5>
                     <h1 class="mb-4 font-weight-semi-bold">Spring Collection</h1>
-                    <a href="" class="btn btn-outline-primary py-md-2 px-md-3">Shop Now</a>
+                    <a href="{%url 'product:product_list'%}" class="btn btn-outline-primary py-md-2 px-md-3">Shop
+                        Now</a>
                 </div>
             </div>
         </div>
@@ -92,7 +93,8 @@
                 <div class="position-relative" style="z-index: 1;">
                     <h5 class="text-uppercase text-primary mb-3">20% off the all order</h5>
                     <h1 class="mb-4 font-weight-semi-bold">Winter Collection</h1>
-                    <a href="" class="btn btn-outline-primary py-md-2 px-md-3">Shop Now</a>
+                    <a href="{%url 'product:product_list'%}" class="btn btn-outline-primary py-md-2 px-md-3">Shop
+                        Now</a>
                 </div>
             </div>
         </div>
@@ -114,10 +116,14 @@
                     <img class="img-fluid w-100" src="{{product.image.url}}" alt="">
                 </div>
                 <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                    <h6 class="text-truncate mb-3">{{product}}</h6>
+                    <h6 class="text-truncate mb-3">{{product.name}}</h6>
                     <div class="d-flex justify-content-center">
-                        <h6>{{product.price}}</h6>
-                        <h6 class="text-muted ml-2"><del>{{product.discount}}</del></h6>
+                        {% if product.discount > 0 %}
+                        <h6>${{product.discount}}</h6>
+                        <h6 class="text-muted ml-2"><del>{{product.price}}</del></h6>
+                        {% else %}
+                        <h6>${{product.price}}</h6>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-between bg-light border">
@@ -175,10 +181,14 @@
                     <img class="img-fluid w-100" src="{{product.image.url}}" alt="">
                 </div>
                 <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                    <h6 class="text-truncate mb-3">{{product}}</h6>
+                    <h6 class="text-truncate mb-3">{{product.name}}</h6>
                     <div class="d-flex justify-content-center">
-                        <h6>{{product.price}}</h6>
-                        <h6 class="text-muted ml-2"><del>{{product.discount}}</del></h6>
+                        {% if product.discount > 0 %}
+                        <h6>${{product.discount}}</h6>
+                        <h6 class="text-muted ml-2"><del>{{product.price}}</del></h6>
+                        {% else %}
+                        <h6>${{product.price}}</h6>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-between bg-light border">
