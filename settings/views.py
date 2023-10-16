@@ -4,7 +4,7 @@ from product.models import ProductCategory , Product
 from django.shortcuts import render
 from django.db.models.query_utils import Q
 from django.db.models import Count
-from .models import  NewsLitter
+from .models import  NewsLitter , Brand
 from django.http import JsonResponse
 
 
@@ -25,6 +25,9 @@ def home(request):
 
 class CategoryList(ListView):
     model = ProductCategory
+
+class BrandList(ListView):
+    model = Brand
 
 def news_letters_subscribe(request):
     email = request.POST.get('emailinput')

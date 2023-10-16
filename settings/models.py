@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 # Create your models here.
 class Brand(models.Model):
     BRDName = models.CharField(max_length=40)
+    image = models.ImageField(upload_to='product/',blank=True, null=True)
     BRDDesc = models.TextField(blank=True, null=True)
 
     class Meta:
