@@ -18,6 +18,6 @@ urlpatterns = [
     path('fetch-cart-count/', views.fetch_cart_count, name='fetch-cart-count'),
     path('create-order/', views.create_order, name='create-order'),
     path('handle-payment/', views.handle_payment, name='handle-payment'),
-    path('checkout/', views.checkout, name='checkout'),
+    path('cart/checkout/', views.checkout, name='checkout'),
 
 ]
