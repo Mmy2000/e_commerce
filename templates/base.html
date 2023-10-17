@@ -25,6 +25,10 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{% static 'css4/style.css'%}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css4/cart.css' %}">
+    <link rel="stylesheet" href="{% static 'css4/checkout.css' %}">
+
+
 </head>
 
 <body>
@@ -48,270 +52,279 @@
                     </div>
                 </form>
             </div>
+            {% if user.is_authenticated %}
             <div class="col-lg-3 col-6 text-right">
-                <a href="" class="btn border">
-                    <i class="fas fa-heart text-primary"></i>
-                    <span class="badge">0</span>
-                </a>
-                <a href="" class="btn border">
+                <a href="{% url 'product:cart' %}" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
-                    <span class="badge">0</span>
                 </a>
+                {% if cart_count == 0 %}
+                {% else %}
+                <span class="cart-count">{{cart_count}}</span>
+                {% endif %}
+                {% endif %}
             </div>
         </div>
-    </div>
-    <!-- Navbar Start -->
-    <div class="container-fluid mb-5">
-        <div class="row border-top px-xl-5">
-            <div class="col-lg-3 d-none d-lg-block">
-                <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100"
-                    data-toggle="collapse" href="#navbar-vertical"
-                    style="height: 65px; margin-top: -1px; padding: 0 30px;">
-                    <h6 class="m-0">Categories</h6>
-                    <i class="fa fa-angle-down text-dark"></i>
-                </a>
-                <nav class="collapse {% if forloop.first %} show {% endif %} navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0"
-                    id="navbar-vertical">
-                    <div class="navbar-nav w-100 overflow-hidden" style="height: 300px">
-                        <div class="nav-item dropdown">
-                            {% for category in categories_footer  %}
-                            <a href="{% url 'product:product_by_category' category %}"
-                                class="nav-item nav-link">{{category}}</a>
-                            {% endfor %}
-                        </div>
-                        <a href="{% url 'settings:category_list'  %}"><button type="button" class="btn btn-primary">Show
-                                More</button></a>
-                </nav>
-            </div>
-            <div class="col-lg-9">
-                <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-                    <a href="" class="text-decoration-none d-block d-lg-none">
-                        <h1 class="m-0 display-5 font-weight-semi-bold"><span
-                                class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
+        <!-- Navbar Start -->
+        <div class="container-fluid mb-5">
+            <div class="row border-top px-xl-5">
+                <div class="col-lg-3 d-none d-lg-block">
+                    <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100"
+                        data-toggle="collapse" href="#navbar-vertical"
+                        style="height: 65px; margin-top: -1px; padding: 0 30px;">
+                        <h6 class="m-0">Categories</h6>
+                        <i class="fa fa-angle-down text-dark"></i>
                     </a>
-                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                        <div class="navbar-nav mr-auto py-0">
-                            <a href="/" class="nav-item nav-link ">Home</a>
-                            <a href="{% url 'product:product_list'%}" class="nav-item nav-link">Shop</a>
+                    <nav class="collapse {% if forloop.first %} show {% endif %} navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0"
+                        id="navbar-vertical">
+                        <div class="navbar-nav w-100 overflow-hidden" style="height: 300px">
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle " data-toggle="dropdown">Brand</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    {% for brand in brands_footer %}
-                                    <a href="{%url 'product:product_by_brand' brand%}"
-                                        class="dropdown-item">{{brand}}</a>
-                                    {% endfor %}
-                                </div>
+                                {% for category in categories_footer  %}
+                                <a href="{% url 'product:product_by_category' category %}"
+                                    class="nav-item nav-link">{{category}}</a>
+                                {% endfor %}
                             </div>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
-                        </div>
-                        <div class="navbar-nav ml-auto py-0">
-                            {% if request.user.is_authenticated %}
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Profile</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="{% url 'accounts:profile' %}" class="dropdown-item">Profile</a>
-                                    <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
-                                </div>
-                            </div>
-
-                            {% else %}
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Login</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="{% url 'login' %}" class="dropdown-item">Login</a>
-                                    <a href="{% url 'accounts:signup' %}" class="dropdown-item">Signup</a>
-                                </div>
-                            </div>
-
-                            {% endif %}
-
-                        </div>
-                    </div>
-                </nav>
-                <div id="header-carousel" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active" style="height: 410px;">
-                            <img class="img-fluid" src="{% static 'img4/carousel-1.jpg'%}" alt="Image">
-                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                <div class="p-3" style="max-width: 700px;">
-                                    <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First
-                                        Order</h4>
-                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4">Fashionable Dress</h3>
-                                    <a href="{%url 'product:product_list'%}" class="btn btn-light py-2 px-3">Shop
-                                        Now</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item" style="height: 410px;">
-                            <img class="img-fluid" src="{% static 'img4/carousel-2.jpg'%}" alt="Image">
-                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                <div class="p-3" style="max-width: 700px;">
-                                    <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First
-                                        Order</h4>
-                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4">Reasonable Price</h3>
-                                    <a href="{%url 'product:product_list'%}" class="btn btn-light py-2 px-3">Shop
-                                        Now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
-                        <div class="btn btn-dark" style="width: 45px; height: 45px;">
-                            <span class="carousel-control-prev-icon mb-n2"></span>
-                        </div>
-                    </a>
-                    <a class="carousel-control-next" href="#header-carousel" data-slide="next">
-                        <div class="btn btn-dark" style="width: 45px; height: 45px;">
-                            <span class="carousel-control-next-icon mb-n2"></span>
-                        </div>
-                    </a>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    {% block body %}
-    {% endblock body %}
-
-
-    <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
-        <div class="row px-xl-5 pt-5">
-            <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
-                <a href="" class="text-decoration-none">
-                    <h1 class="mb-4 display-5 font-weight-semi-bold"><span
-                            class="text-primary font-weight-bold border border-white px-3 mr-1">E</span>{{myfooter.site_name}}
-                    </h1>
-                </a>
-                <p>{{myfooter.description}}</p>
-                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>{{myfooter.address}}</p>
-                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>{{myfooter.email}}</p>
-                <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>{{myfooter.phone}}</p>
-            </div>
-
-            <div class="col-lg-8 col-md-12">
-                <div class="row">
-                    <div class="col-md-4 mb-5">
-                        <h5 class="font-weight-bold text-dark mb-4">Categories</h5>
-                        <div class="d-flex flex-column justify-content-start">
-                            {% for category in categories_footer %}
-                            <a class="text-dark mb-2" href="{% url 'product:product_by_category' category %}"><i
-                                    class="fa fa-angle-right mr-2"></i>{{category}}</a>
-                            {% endfor %}
                             <a href="{% url 'settings:category_list'  %}"><button type="button"
                                     class="btn btn-primary">Show
                                     More</button></a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-5">
-                        <h5 class="font-weight-bold text-dark mb-4">Brand</h5>
-                        <div class="d-flex flex-column justify-content-start">
-                            {% for brand in brands_footer  %}
-                            <a class="text-dark mb-2" href="{%url 'product:product_by_brand' brand%}"><i
-                                    class="fa fa-angle-right mr-2"></i>{{brand}}</a>
-                            {% endfor %}
-                            <a href="{% url 'settings:brand_list'  %}"><button type="button"
-                                    class="btn btn-primary">Show
-                                    More</button></a>
-                        </div>
-                    </div>
-                    <div id="main_form_div" class="col-md-4 mb-5">
-                        <h5 class="font-weight-bold text-dark mb-4">Newsletter</h5>
-                        <form id="newsletters_form" action="{% url 'home:newsletter' %}  method=" POST"">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <input type="email" name="emailinput" class="form-control border-0 py-4"
-                                    placeholder="Your Email" required="required" />
+                    </nav>
+                </div>
+                <div class="col-lg-9">
+                    <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+                        <a href="" class="text-decoration-none d-block d-lg-none">
+                            <h1 class="m-0 display-5 font-weight-semi-bold"><span
+                                    class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
+                        </a>
+                        <button type="button" class="navbar-toggler" data-toggle="collapse"
+                            data-target="#navbarCollapse">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                            <div class="navbar-nav mr-auto py-0">
+                                <a href="/" class="nav-item nav-link ">Home</a>
+                                <a href="{% url 'product:product_list'%}" class="nav-item nav-link">Shop</a>
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle " data-toggle="dropdown">Brand</a>
+                                    <div class="dropdown-menu rounded-0 m-0">
+                                        {% for brand in brands_footer %}
+                                        <a href="{%url 'product:product_by_brand' brand%}"
+                                            class="dropdown-item">{{brand}}</a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <a href="contact.html" class="nav-item nav-link">Contact</a>
                             </div>
-                            <div>
-                                <button class="btn btn-primary btn-block border-0 py-3" type="submit">Subscribe
-                                    Now</button>
+                            <div class="navbar-nav ml-auto py-0">
+                                {% if request.user.is_authenticated %}
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Profile</a>
+                                    <div class="dropdown-menu rounded-0 m-0">
+                                        <a href="{% url 'accounts:profile' %}" class="dropdown-item">Profile</a>
+                                        <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
+                                    </div>
+                                </div>
+
+                                {% else %}
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Login</a>
+                                    <div class="dropdown-menu rounded-0 m-0">
+                                        <a href="{% url 'login' %}" class="dropdown-item">Login</a>
+                                        <a href="{% url 'accounts:signup' %}" class="dropdown-item">Signup</a>
+                                    </div>
+                                </div>
+
+                                {% endif %}
+
                             </div>
-                        </form>
+                        </div>
+                    </nav>
+                    <div id="header-carousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" style="height: 410px;">
+                                <img class="img-fluid" src="{% static 'img4/carousel-1.jpg'%}" alt="Image">
+                                <div
+                                    class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                    <div class="p-3" style="max-width: 700px;">
+                                        <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First
+                                            Order</h4>
+                                        <h3 class="display-4 text-white font-weight-semi-bold mb-4">Fashionable Dress
+                                        </h3>
+                                        <a href="{%url 'product:product_list'%}" class="btn btn-light py-2 px-3">Shop
+                                            Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item" style="height: 410px;">
+                                <img class="img-fluid" src="{% static 'img4/carousel-2.jpg'%}" alt="Image">
+                                <div
+                                    class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                    <div class="p-3" style="max-width: 700px;">
+                                        <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First
+                                            Order</h4>
+                                        <h3 class="display-4 text-white font-weight-semi-bold mb-4">Reasonable Price
+                                        </h3>
+                                        <a href="{%url 'product:product_list'%}" class="btn btn-light py-2 px-3">Shop
+                                            Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+                            <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                                <span class="carousel-control-prev-icon mb-n2"></span>
+                            </div>
+                        </a>
+                        <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+                            <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                                <span class="carousel-control-next-icon mb-n2"></span>
+                            </div>
+                        </a>
                     </div>
-                    <div id="main_form_div" class="col-md-4 mb-5">
-                        <h5 id="success_div" style="display: none;" class="font-weight-bold text-dark mb-4">Subcribed
-                            Successfuly</h5>
-                    </div>
-                    <div class="col-lg-6 text-center text-lg-right">
-                        <div class="d-inline-flex align-items-center">
-                            <a class="text-dark px-2" href="{{myfooter.fb_link}}">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a class="text-dark px-2" href="{{myfooter.twitter_link}}">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a class="text-dark px-2" href="">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a class="text-dark px-2" href="">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a class="text-dark pl-2" href="">
-                                <i class="fab fa-youtube"></i>
-                            </a>
+
+                </div>
+            </div>
+        </div>
+
+        {% block body %}
+        {% endblock body %}
+
+
+        <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
+            <div class="row px-xl-5 pt-5">
+                <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+                    <a href="" class="text-decoration-none">
+                        <h1 class="mb-4 display-5 font-weight-semi-bold"><span
+                                class="text-primary font-weight-bold border border-white px-3 mr-1">E</span>{{myfooter.site_name}}
+                        </h1>
+                    </a>
+                    <p>{{myfooter.description}}</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>{{myfooter.address}}</p>
+                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>{{myfooter.email}}</p>
+                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>{{myfooter.phone}}</p>
+                </div>
+
+                <div class="col-lg-8 col-md-12">
+                    <div class="row">
+                        <div class="col-md-4 mb-5">
+                            <h5 class="font-weight-bold text-dark mb-4">Categories</h5>
+                            <div class="d-flex flex-column justify-content-start">
+                                {% for category in categories_footer %}
+                                <a class="text-dark mb-2" href="{% url 'product:product_by_category' category %}"><i
+                                        class="fa fa-angle-right mr-2"></i>{{category}}</a>
+                                {% endfor %}
+                                <a href="{% url 'settings:category_list'  %}"><button type="button"
+                                        class="btn btn-primary">Show
+                                        More</button></a>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-5">
+                            <h5 class="font-weight-bold text-dark mb-4">Brand</h5>
+                            <div class="d-flex flex-column justify-content-start">
+                                {% for brand in brands_footer  %}
+                                <a class="text-dark mb-2" href="{%url 'product:product_by_brand' brand%}"><i
+                                        class="fa fa-angle-right mr-2"></i>{{brand}}</a>
+                                {% endfor %}
+                                <a href="{% url 'settings:brand_list'  %}"><button type="button"
+                                        class="btn btn-primary">Show
+                                        More</button></a>
+                            </div>
+                        </div>
+                        <div id="main_form_div" class="col-md-4 mb-5">
+                            <h5 class="font-weight-bold text-dark mb-4">Newsletter</h5>
+                            <form id="newsletters_form" action="{% url 'home:newsletter' %}  method=" POST"">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <input type="email" name="emailinput" class="form-control border-0 py-4"
+                                        placeholder="Your Email" required="required" />
+                                </div>
+                                <div>
+                                    <button class="btn btn-primary btn-block border-0 py-3" type="submit">Subscribe
+                                        Now</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="main_form_div" class="col-md-4 mb-5">
+                            <h5 id="success_div" style="display: none;" class="font-weight-bold text-dark mb-4">
+                                Subcribed
+                                Successfuly</h5>
+                        </div>
+                        <div class="col-lg-6 text-center text-lg-right">
+                            <div class="d-inline-flex align-items-center">
+                                <a class="text-dark px-2" href="{{myfooter.fb_link}}">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a class="text-dark px-2" href="{{myfooter.twitter_link}}">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a class="text-dark px-2" href="">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a class="text-dark px-2" href="">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a class="text-dark pl-2" href="">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row border-top border-light mx-xl-5 py-4">
-            <div class="col-md-6 px-xl-0">
-                <p class="mb-md-0 text-center text-md-left text-dark">
-                    &copy; <a class="text-dark font-weight-semi-bold" href="#">{{myfooter.site_name}}</a>. All
-                    Rights
-                    Reserved.
-                    Designed
-                    by
-                    <a class="text-dark font-weight-semi-bold" href="https://htmlcodex.com">HTML Codex</a><br>
-                    Distributed By <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
-                </p>
+            <div class="row border-top border-light mx-xl-5 py-4">
+                <div class="col-md-6 px-xl-0">
+                    <p class="mb-md-0 text-center text-md-left text-dark">
+                        &copy; <a class="text-dark font-weight-semi-bold" href="#">{{myfooter.site_name}}</a>. All
+                        Rights
+                        Reserved.
+                        Designed
+                        by
+                        <a class="text-dark font-weight-semi-bold" href="https://htmlcodex.com">HTML Codex</a><br>
+                        Distributed By <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                    </p>
+                </div>
+                <div class="col-md-6 px-xl-0 text-center text-md-right">
+                    <img class="img-fluid" src="img/payments.png" alt="">
+                </div>
             </div>
-            <div class="col-md-6 px-xl-0 text-center text-md-right">
-                <img class="img-fluid" src="img/payments.png" alt="">
-            </div>
         </div>
-    </div>
-    <!-- Footer End -->
+        <!-- Footer End -->
 
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="{% static 'lib4/easing/easing.min.js'%}"></script>
-    <script src="{% static 'lib4/owlcarousel/owl.carousel.min.js'%}"></script>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="{% static 'lib4/easing/easing.min.js'%}"></script>
+        <script src="{% static 'lib4/owlcarousel/owl.carousel.min.js'%}"></script>
 
-    <!-- Contact Javascript File -->
-    <script src="{% static 'mail4/jqBootstrapValidation.min.js'%}"></script>
-    <script src="{% static 'mail4/contact.js'%}"></script>
+        <!-- Contact Javascript File -->
+        <script src="{% static 'mail4/jqBootstrapValidation.min.js'%}"></script>
+        <script src="{% static 'mail4/contact.js'%}"></script>
 
-    <!-- Template Javascript -->
-    <script src="{% static 'js4/main.js'%}"></script>
-    <script src="{% static 'js4/cart.js'%}"></script>
-    <script>
-        $("#newsletters_form").submit(function (e) {
-            e.preventDefault();
-            var form = $(this);
-            var url = form.attr('action');
+        <!-- Template Javascript -->
+        <script src="{% static 'js4/main.js'%}"></script>
+        <script src="{% static 'js4/cart.js'%}"></script>
+        <script src="{% static 'js4/checkout.js' %}"></script>
 
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: form.serialize(),
-                success: function (data) {
-                    document.getElementById('main_form_div').style.display = "none";
-                    document.getElementById('success_div').style.display = "block";
-                }
+        <script>
+            $("#newsletters_form").submit(function (e) {
+                e.preventDefault();
+                var form = $(this);
+                var url = form.attr('action');
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: form.serialize(),
+                    success: function (data) {
+                        document.getElementById('main_form_div').style.display = "none";
+                        document.getElementById('success_div').style.display = "block";
+                    }
+                })
             })
-        })
-    </script>
+        </script>
 </body>
 
 </html>

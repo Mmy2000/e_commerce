@@ -36,18 +36,17 @@
 
 .remove-from-cart-btn,
 .quantity-btn {
-    background-color: #ff6347;
-    color: white;
+    background-color: rgb(220, 156, 156); 
+    color: rgb(0, 0, 0);
     border: none;
-    border-radius: 4px;
-    padding: 5px 10px;
+    padding: 5px 8px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 .remove-from-cart-btn:hover,
 .quantity-btn:hover {
-    background-color: #e74c3c;
+    color:rgb(255, 255, 255); 
 }
 
 .cart-item-quantity {
@@ -64,20 +63,20 @@
     display: inline-block;
     margin-top: 20px;
     text-decoration: none;
-    color: #3498db;
+    color: rgb(220, 156, 156); 
     font-weight: bold;
 }
 
 .continue-shopping-link:hover {
     text-decoration: underline;
+    color: rgb(255, 255, 255); 
 }
 
 .checkout-button {
     display: inline-block;
-    background-color: #28a745; 
-    color: white;
+    background-color: rgb(220, 156, 156); 
+    color: rgb(0, 0, 0);
     padding: 10px 20px;
-    border-radius: 4px;
     margin-top: 20px;
     margin-left: 400px;
     text-decoration: none;
@@ -86,5 +85,5 @@
 }
 
 .checkout-button:hover {
-    background-color: #218838;
+    color: white;
 }

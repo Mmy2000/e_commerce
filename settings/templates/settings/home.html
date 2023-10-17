@@ -150,7 +150,7 @@
                     <a href="{{product.get_absolute_url}}" class="btn btn-sm text-dark p-0"><i
                             class="fas fa-eye text-primary mr-1"></i>View
                         Detail</a>
-                    <a href="" class="btn btn-sm text-dark p-0"><i
+                    <a href="{%url 'product:add-to-cart' product.id  %}" class="btn btn-sm text-dark p-0"><i
                             class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
                 </div>
             </div>
@@ -215,7 +215,7 @@
                     <a href="{{product.get_absolute_url}}" class="btn btn-sm text-dark p-0"><i
                             class="fas fa-eye text-primary mr-1"></i>View
                         Detail</a>
-                    <a href="" class="btn btn-sm text-dark p-0"><i
+                    <a href="{%url 'product:add-to-cart' product.id  %}" class="btn btn-sm text-dark p-0"><i
                             class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
                 </div>
             </div>
@@ -229,18 +229,6 @@
 </div>
 <!-- Products End -->
 
-{% if user.is_authenticated %}
-<div class="cart-icon">
-    <a href="{% url 'product:cart' %}" class="view-cart-link">
-        <img src="{% static 'images/cart.png' %}" alt="Cart">
-    </a>
-    {% if cart_count == 0 %}
-    <span></span>
-    {% else %}
-    <span class="cart-count">{{ cart_count }}</span>
-    {% endif %}
-
-    {% endif %}
 
 
     <!-- Vendor Start -->
