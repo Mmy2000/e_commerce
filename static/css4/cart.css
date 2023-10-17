@@ -23,6 +23,7 @@
 .cart-item-details {
     display: flex;
     align-items: center;
+    color :rgb(0, 0, 0);
 }
 
 .cart-item-name {
@@ -39,7 +40,7 @@
     background-color: rgb(220, 156, 156); 
     color: rgb(0, 0, 0);
     border: none;
-    padding: 5px 8px;
+    padding: 5px 10px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
@@ -53,10 +54,12 @@
     display: flex;
     align-items: center;
     margin-right: 10px;
+    color :black;
 }
 
 .cart-item-price {
     font-weight: bold;
+    color :black;
 }
 
 .continue-shopping-link {
@@ -68,7 +71,7 @@
 }
 
 .continue-shopping-link:hover {
-    text-decoration: underline;
+    text-decoration: none;
     color: rgb(0, 0, 0); 
 }
 
@@ -86,4 +89,5 @@
 
 .checkout-button:hover {
     color: white;
+    text-decoration: none;
 }
