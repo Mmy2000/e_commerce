@@ -30,6 +30,7 @@
                 <form action="{% url 'product:increase-cart-item' item.product.id %}" method="post">
                     {% csrf_token %}
                     <button class="quantity-btn increase-quantity" type="submit">+</button>
+                    {% bootstrap_button button_type="submit" content="Save" %}
                 </form>&nbsp; &nbsp;
                 <span class="item-quantity">{{ item.quantity }}</span>&nbsp; &nbsp;
                 <form action="{% url 'product:decrease-cart-item' item.product.id %}" method="post">
