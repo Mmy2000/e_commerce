@@ -4,7 +4,7 @@ from product.models import ProductCategory , Product
 from django.shortcuts import render
 from django.db.models.query_utils import Q
 from django.db.models import Count
-from .models import  NewsLitter , Brand
+from .models import  NewsLitter , Brand , Info
 from django.http import JsonResponse
 
 # Create your views here.
@@ -38,3 +38,8 @@ def news_letters_subscribe(request):
     email = request.POST.get('emailinput')
     NewsLitter.objects.create(email=email)
     return JsonResponse({'done':'done'})
+
+
+def contact(request):
+    site_info = Info.objects.last()
+    return render(request,'settings/contact.html',{'site_info': site_info})

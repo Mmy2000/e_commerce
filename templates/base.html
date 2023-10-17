@@ -59,7 +59,7 @@
                 </a>
                 {% if cart_count == 0 %}
                 {% else %}
-                <span class="cart-count">{{cart_count}}</span>
+                <span class="cart-count">{{object.cart_count}}</span>
                 {% endif %}
                 {% endif %}
             </div>
@@ -111,7 +111,7 @@
                                         {% endfor %}
                                     </div>
                                 </div>
-                                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                                <a href="{% url 'settings:contact'%}" class="nav-item nav-link">Contact</a>
                             </div>
                             <div class="navbar-nav ml-auto py-0">
                                 {% if request.user.is_authenticated %}
