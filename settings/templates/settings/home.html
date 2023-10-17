@@ -14,6 +14,26 @@
     .button_style2 {
         text-align: center;
     }
+
+    .cart-icon {
+        position: relative;
+        display: inline-block;
+    }
+
+    .cart-count {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+    }
 </style>
 
 
@@ -209,39 +229,52 @@
 </div>
 <!-- Products End -->
 
+{% if user.is_authenticated %}
+<div class="cart-icon">
+    <a href="{% url 'product:cart' %}" class="view-cart-link">
+        <img src="{% static 'images/cart.png' %}" alt="Cart">
+    </a>
+    {% if cart_count == 0 %}
+    <span></span>
+    {% else %}
+    <span class="cart-count">{{ cart_count }}</span>
+    {% endif %}
 
-<!-- Vendor Start -->
-<div class="container-fluid py-5">
-    <div class="row px-xl-5">
-        <div class="col">
-            <div class="owl-carousel vendor-carousel">
-                <div class="vendor-item border p-4">
-                    <img src="{% static 'img4/vendor-1.jpg'%}" alt="">
-                </div>
-                <div class="vendor-item border p-4">
-                    <img src="{% static 'img4/vendor-2.jpg'%}" alt="">
-                </div>
-                <div class="vendor-item border p-4">
-                    <img src="{% static 'img4/vendor-3.jpg'%}" alt="">
-                </div>
-                <div class="vendor-item border p-4">
-                    <img src="{% static 'img4/vendor-4.jpg'%}" alt="">
-                </div>
-                <div class="vendor-item border p-4">
-                    <img src="{% static 'img4/vendor-5.jpg'%}" alt="">
-                </div>
-                <div class="vendor-item border p-4">
-                    <img src="{% static 'img4/vendor-6.jpg'%}" alt="">
-                </div>
-                <div class="vendor-item border p-4">
-                    <img src="{% static 'img4/vendor-7.jpg'%}" alt="">
-                </div>
-                <div class="vendor-item border p-4">
-                    <img src="{% static 'img4/vendor-8.jpg'%}" alt="">
+    {% endif %}
+
+
+    <!-- Vendor Start -->
+    <div class="container-fluid py-5">
+        <div class="row px-xl-5">
+            <div class="col">
+                <div class="owl-carousel vendor-carousel">
+                    <div class="vendor-item border p-4">
+                        <img src="{% static 'img4/vendor-1.jpg'%}" alt="">
+                    </div>
+                    <div class="vendor-item border p-4">
+                        <img src="{% static 'img4/vendor-2.jpg'%}" alt="">
+                    </div>
+                    <div class="vendor-item border p-4">
+                        <img src="{% static 'img4/vendor-3.jpg'%}" alt="">
+                    </div>
+                    <div class="vendor-item border p-4">
+                        <img src="{% static 'img4/vendor-4.jpg'%}" alt="">
+                    </div>
+                    <div class="vendor-item border p-4">
+                        <img src="{% static 'img4/vendor-5.jpg'%}" alt="">
+                    </div>
+                    <div class="vendor-item border p-4">
+                        <img src="{% static 'img4/vendor-6.jpg'%}" alt="">
+                    </div>
+                    <div class="vendor-item border p-4">
+                        <img src="{% static 'img4/vendor-7.jpg'%}" alt="">
+                    </div>
+                    <div class="vendor-item border p-4">
+                        <img src="{% static 'img4/vendor-8.jpg'%}" alt="">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Vendor End -->
-{% endblock body %}
+    <!-- Vendor End -->
+    {% endblock body %}

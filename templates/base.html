@@ -94,10 +94,10 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="/" class="nav-item nav-link active">Home</a>
+                            <a href="/" class="nav-item nav-link ">Home</a>
                             <a href="{% url 'product:product_list'%}" class="nav-item nav-link">Shop</a>
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Brand</a>
+                                <a href="#" class="nav-link dropdown-toggle " data-toggle="dropdown">Brand</a>
                                 <div class="dropdown-menu rounded-0 m-0">
                                     {% for brand in brands_footer %}
                                     <a href="{%url 'product:product_by_brand' brand%}"
@@ -294,6 +294,7 @@
 
     <!-- Template Javascript -->
     <script src="{% static 'js4/main.js'%}"></script>
+    <script src="{% static 'js4/cart.js'%}"></script>
     <script>
         $("#newsletters_form").submit(function (e) {
             e.preventDefault();
