@@ -39,14 +39,16 @@
                     {% bootstrap_button button_type="submit" content="Save" %}
                 </form>
             </div>
+
             {% if product.discount > 0 %}
             <div class="cart-item-price" data-price="{{ item.product.discount }}">
                 ${{ item.product.discount }}
             </div>
             {% else %}
             <div class="cart-item-price" data-price="{{ item.product.price }}">
-                ${{ item.product.price }}
-                {% endif %}
+                ${{ item.product.price }} </div>
+
+            {% endif %}
         </li>
         {% endfor %}
     </ul>
