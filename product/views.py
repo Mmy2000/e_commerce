@@ -95,6 +95,7 @@ class ProductBysize(ListView):
             Q(size__name__icontains = slug)
         )
         return object_list
+    
 
 class ProductDetail(DetailView):
     model = Product
