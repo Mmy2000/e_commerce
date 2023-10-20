@@ -5,6 +5,8 @@ from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 from accounts.models import Profile
 from django.contrib.auth.models import User
+from taggit.managers import TaggableManager
+
 
 
 
@@ -20,6 +22,7 @@ class Product(models.Model):
     color = models.ForeignKey('Color',related_name='product_color',null=True,blank=True, on_delete=models.CASCADE)
     size = models.ForeignKey('Size',related_name='product_size',null=True,blank=True, on_delete=models.CASCADE)
     slug = models.SlugField(null=True,blank=True)
+    tags = TaggableManager()
 
     def save(self,*args, **kwargs):
         if not self.slug:
