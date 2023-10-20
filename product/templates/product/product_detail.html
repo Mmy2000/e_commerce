@@ -97,19 +97,25 @@
             <div class="nav nav-tabs justify-content-center border-secondary mb-4">
                 <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Description</a>
                 <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-3">Reviews (0)</a>
+                {% if object.tags.all %}
                 <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-2">Tags</a>
+                {% else %}
+                {% endif %}
             </div>
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="tab-pane-1">
                     <h4 class="mb-3">Product Description</h4>
                     <p>{{object.description}}</p>
                 </div>
+                {% if object.tags.all %}
                 <div class="tab-pane fade " id="tab-pane-2">
                     <h4 class="mb-3">Tags</h4>
                     {% for tag in object.tags.all %}
-                   <a href="#" class="tag-cloud-link">{{tag}}</a>
+                    <a href="{% url 'product:product_by_tags' tag%}" class="tag-cloud-link">{{tag}}</a>&nbsp; &nbsp;
                     {% endfor %}
                 </div>
+                {% else %}
+                {% endif %}
 
                 <div class="tab-pane fade" id="tab-pane-3">
                     <div class="row">
