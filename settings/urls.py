@@ -1,5 +1,6 @@
 from django.urls import path
-from . views import home , CategoryList ,news_letters_subscribe , BrandList , home_search , contact
+from . views import home , CategoryList ,news_letters_subscribe , BrandList , contact
+from . footer import home_search
 
 app_name = 'settings'
 

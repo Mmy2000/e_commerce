@@ -43,7 +43,7 @@
             <div class="col-lg-6 col-6 text-left">
                 <form action="{% url 'home:home_search' %}" method="GET">
                     <div class="input-group">
-                        <input type="text" name="name" class="form-control" placeholder="Search for products">
+                        <input type="text" name="q" class="form-control" placeholder="Search for products">
                         <div class="input-group-append">
                             <span class="input-group-text bg-transparent text-primary">
                                 <i class="fa fa-search"></i>
@@ -282,7 +282,7 @@
                     </p>
                 </div>
                 <div class="col-md-6 px-xl-0 text-center text-md-right">
-                    <img class="img-fluid" src="img/payments.png" alt="">
+                    <img class="img-fluid" src="{% static 'img4/payments.png' %}" alt="">
                 </div>
             </div>
         </div>
