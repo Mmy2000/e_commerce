@@ -47,7 +47,6 @@ class Info(models.Model):
 
 class NewsLitter(models.Model):
     email = models.EmailField( max_length=254)
-    name = models.CharField(max_length=50,null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
     
 

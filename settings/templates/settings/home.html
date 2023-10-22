@@ -168,23 +168,31 @@
 <!-- Subscribe Start -->
 <div class="container-fluid bg-secondary my-5">
     <div class="row justify-content-md-center py-5 px-xl-5">
-        <div class="col-md-6 col-12 py-5">
+        <div id="main_form_div" class="col-md-6 col-12 py-5">
             <div class="text-center mb-2 pb-2">
                 <h2 class="section-title px-5 mb-3"><span class="bg-secondary px-2">Stay Updated</span></h2>
                 <p>Amet lorem at rebum amet dolores. Elitr lorem dolor sed amet diam labore at justo ipsum eirmod duo
                     labore labore.</p>
             </div>
-            <form action="">
+            <form id="newsletter_form" action="{% url 'home:newsletter' %}" method="POST">
+                {% csrf_token %}
                 <div class="input-group">
-                    <input type="text" class="form-control border-white p-4" placeholder="Email Goes Here">
+                    <input type="text" name="emailinput" class="form-control border-white p-4"
+                        placeholder="Email Goes Here">
                     <div class="input-group-append">
                         <button class="btn btn-primary px-4">Subscribe</button>
                     </div>
                 </div>
             </form>
         </div>
+        <div id="success_div" style="display: none;" class="col-md-6 col-12 py-5">
+            <div class="text-center mb-2 pb-2">
+                <h4>Subcribed Successfuly</h4>
+            </div>
+        </div>
     </div>
 </div>
+
 <!-- Subscribe End -->
 
 
@@ -231,38 +239,57 @@
 
 
 
-    <!-- Vendor Start -->
-    <div class="container-fluid py-5">
-        <div class="row px-xl-5">
-            <div class="col">
-                <div class="owl-carousel vendor-carousel">
-                    <div class="vendor-item border p-4">
-                        <img src="{% static 'img4/vendor-1.jpg'%}" alt="">
-                    </div>
-                    <div class="vendor-item border p-4">
-                        <img src="{% static 'img4/vendor-2.jpg'%}" alt="">
-                    </div>
-                    <div class="vendor-item border p-4">
-                        <img src="{% static 'img4/vendor-3.jpg'%}" alt="">
-                    </div>
-                    <div class="vendor-item border p-4">
-                        <img src="{% static 'img4/vendor-4.jpg'%}" alt="">
-                    </div>
-                    <div class="vendor-item border p-4">
-                        <img src="{% static 'img4/vendor-5.jpg'%}" alt="">
-                    </div>
-                    <div class="vendor-item border p-4">
-                        <img src="{% static 'img4/vendor-6.jpg'%}" alt="">
-                    </div>
-                    <div class="vendor-item border p-4">
-                        <img src="{% static 'img4/vendor-7.jpg'%}" alt="">
-                    </div>
-                    <div class="vendor-item border p-4">
-                        <img src="{% static 'img4/vendor-8.jpg'%}" alt="">
-                    </div>
+<!-- Vendor Start -->
+<div class="container-fluid py-5">
+    <div class="row px-xl-5">
+        <div class="col">
+            <div class="owl-carousel vendor-carousel">
+                <div class="vendor-item border p-4">
+                    <img src="{% static 'img4/vendor-1.jpg'%}" alt="">
+                </div>
+                <div class="vendor-item border p-4">
+                    <img src="{% static 'img4/vendor-2.jpg'%}" alt="">
+                </div>
+                <div class="vendor-item border p-4">
+                    <img src="{% static 'img4/vendor-3.jpg'%}" alt="">
+                </div>
+                <div class="vendor-item border p-4">
+                    <img src="{% static 'img4/vendor-4.jpg'%}" alt="">
+                </div>
+                <div class="vendor-item border p-4">
+                    <img src="{% static 'img4/vendor-5.jpg'%}" alt="">
+                </div>
+                <div class="vendor-item border p-4">
+                    <img src="{% static 'img4/vendor-6.jpg'%}" alt="">
+                </div>
+                <div class="vendor-item border p-4">
+                    <img src="{% static 'img4/vendor-7.jpg'%}" alt="">
+                </div>
+                <div class="vendor-item border p-4">
+                    <img src="{% static 'img4/vendor-8.jpg'%}" alt="">
                 </div>
             </div>
         </div>
     </div>
-    <!-- Vendor End -->
-    {% endblock body %}
+</div>
+<!-- Vendor End -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+    $("#newsletter_form").submit(function (e) {
+        e.preventDefault();
+        var form = $(this);
+        var url = form.attr('action');
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(),
+            success: function (data) {
+                document.getElementById('main_form_div').style.display = "none";
+                document.getElementById('success_div').style.display = "block";
+            }
+        })
+    })
+</script>
+{% endblock body %}
