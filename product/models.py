@@ -16,7 +16,7 @@ class Product(models.Model):
     price = models.IntegerField(default=0)
     discount = models.IntegerField(default=0)
     description = models.TextField(max_length=10000)
-    like = models.ManyToManyField(User , blank=True)
+    like = models.ManyToManyField(User , blank=True,related_name='product_favourite')
     created_at = models.DateTimeField( default=timezone.now)
     category = models.ManyToManyField('ProductCategory',related_name='product_category',verbose_name=('category'),  default="")
     PRDBrand = models.ForeignKey('settings.Brand' ,related_name='product_brand', on_delete=models.CASCADE , blank=True, null=True ,verbose_name=_("Brand "))
