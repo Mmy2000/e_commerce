@@ -54,14 +54,19 @@
             </div>
             {% if user.is_authenticated %}
             <div class="col-lg-3 col-6 text-right">
+                <a href="" class="btn border">
+                    <i class="fas fa-heart text-primary"></i>
+                    <span class="badge">0</span>
+                </a>
                 <a href="{% url 'product:cart' %}" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
+                    {% if cart_count == 0 %}
+                    <span class="badge">0</span>
+                    {% else %}
+                    <span class="badge">{{object.cart_count}}</span>
+                    {% endif %}
                 </a>
-                {% if cart_count == 0 %}
-                {% else %}
-                <span class="cart-count">{{object.cart_count}}</span>
-                {% endif %}
-                {% endif %}
+            {% endif %}
             </div>
         </div>
         <!-- Navbar Start -->

@@ -22,6 +22,7 @@
         <!-- Shop Sidebar Start -->
         <div class="col-lg-3 col-md-12">
             <!-- Price Start -->
+            <!-- 
             <div class="border-bottom mb-4 pb-4">
                 <h5 class="font-weight-semi-bold mb-4">Filter by price</h5>
                 <form>
@@ -57,6 +58,7 @@
                     </div>
                 </form>
             </div>
+            -->
             <!-- Price End -->
 
             <!-- Color Start -->
@@ -188,16 +190,15 @@
                             <li class="page-item">
                                 <a class="page-link" href="?page={{page_obj.next_page_number}}" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only">Next</span>
                                 </a>
                             </li>
                             {% else %}
-                            <div class="page-link" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
-                            </div>
-                            {% endif %}
-
+                            <li class="page-item disabled">
+                                <div class="page-link" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </div>
+                                {% endif %}
+                            </li>
                         </ul>
                     </nav>
                 </div>

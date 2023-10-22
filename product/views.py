@@ -6,7 +6,6 @@ from django.db.models import Count
 from django_filters.views import FilterView
 from . filters import ProductFilter
 from django.db.models.query_utils import Q
-from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.http import HttpResponseRedirect
