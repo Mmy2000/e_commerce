@@ -54,7 +54,7 @@
             </div>
             {% if user.is_authenticated %}
             <div class="col-lg-3 col-6 text-right">
-                <a href="" class="btn border">
+                <a href="{% url 'accounts:user_favourites' %}" class="btn border">
                     <i class="fas fa-heart text-primary"></i>
                     <span class="badge">0</span>
                 </a>
@@ -125,6 +125,7 @@
                                     <div class="dropdown-menu rounded-0 m-0">
                                         <a href="{% url 'accounts:profile' %}" class="dropdown-item">Profile</a>
                                         <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
+                                        <a href="{% url 'accounts:user_favourites' %}" class="dropdown-item">Favourit</a>
                                     </div>
                                 </div>
 

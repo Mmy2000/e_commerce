@@ -1,6 +1,7 @@
 from django.shortcuts import render , redirect , get_object_or_404
 from .forms import SignupForm , UserForm , ProfileForm
 from .models import Profile
+from product.models import Product
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate , login 
 
@@ -54,4 +55,6 @@ def edit_profile(requset):
     })
 
 
-
+def user_favourites(request):
+    user_favourites = Product.objects.filter(like=request.user)
+    return render(request,'profile/user_favourite.html',{'user_favourites':user_favourites})

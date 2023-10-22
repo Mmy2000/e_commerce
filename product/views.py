@@ -43,6 +43,16 @@ class ProductList(ListView):
         )
         return object_list
 
+def like_or_unlike(request,id):
+    product = Product.objects.get(id=id)
+
+    if request.user in product.like.all():
+        product.like.remove(request.user)
+    
+    else:
+        product.like.add(request.user)
+    
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 class ProductByCategory(ListView):
     model = Product
