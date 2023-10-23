@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render , get_object_or_404
 from django.views.generic import ListView , DetailView
 from .models import Product
 from .models import  ProductCategory , Color, Size , Cart, CartItem, Order, OrderItem
@@ -15,6 +15,9 @@ from django.conf import settings
 import razorpay
 import json
 from django.views.decorators.csrf import csrf_exempt
+from .forms import ProductReviewForm
+from django.views.generic.edit import FormMixin
+
 
 
 
@@ -119,15 +122,24 @@ class ProductBysize(ListView):
         return object_list
     
 
-class ProductDetail(DetailView):
+class ProductDetail(FormMixin , DetailView):
     model = Product
+    form_class = ProductReviewForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["related"] = Product.objects.filter(PRDBrand=self.get_object().PRDBrand)
         return context
     
+    def post(self , request , *args , **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            myform = form.save(commit=False)
+            myform.product= self.get_object()
+            myform.auther = request.user
+            myform.save()
 
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
     
 @login_required(login_url='login')
 def add_to_cart(request, product_id):
@@ -292,3 +304,4 @@ def handle_payment(request):
 
             print(str(e))
             return JsonResponse({'message': 'Server error, please try again later.'})
+        
