@@ -43,12 +43,9 @@
         <div class="col-lg-7 pb-5">
             <h3 class="font-weight-semi-bold">{{object}}</h3>
             <div class="d-flex mb-3">
-                {% if object.get_avg_rating %}
                 <div class="text-primary mr-2">
                     <small class="fas fa-star">&nbsp;{{object.get_avg_rating}}</small>
                 </div>
-                {% else %}
-                {% endif %}
             </div>
             <h3 class="font-weight-semi-bold mb-4">${{object.price}}</h3>
             <p class="mb-4">{{object.description}}</p>
