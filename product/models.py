@@ -37,7 +37,7 @@ class Product(models.Model):
         return self.name
     
     def get_avg_rating(self):
-        all_reviews = self.review_property.all()
+        all_reviews = self.review_product.all()
         all_rating = 0
         if len(all_reviews)>0:
             for review in all_reviews:
