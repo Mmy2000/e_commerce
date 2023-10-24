@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import render
 from django.views.generic import ListView , DetailView
 from product.models import ProductCategory , Product 
@@ -6,6 +7,9 @@ from django.db.models.query_utils import Q
 from django.db.models import Count
 from .models import  NewsLitter , Brand , Info
 from django.http import JsonResponse
+from . forms import ContactForm
+from django.core.mail import send_mail
+
 
 # Create your views here.
 def home(request):
@@ -36,4 +40,18 @@ def news_letters_subscribe(request):
 
 def contact(request):
     site_info = Info.objects.last()
-    return render(request,'settings/contact.html',{'site_info': site_info})
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid(): 
+            form.save()
+            subject = "Welcome to PythonGuides Training Course"
+            message = "Our team will contact you within 24hrs."
+            email_from = settings.EMAIL_HOST_USER
+            email = form.cleaned_data['email']
+            recipient_list =email
+            send_mail(subject, message, email_from, [recipient_list])
+            return render(request, 'success.html') 
+    form = ContactForm()
+    context = {'form': form ,
+               'site_info': site_info}
+    return render(request,'settings/contact.html',context)
