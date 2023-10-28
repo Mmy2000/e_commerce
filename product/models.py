@@ -22,7 +22,7 @@ class Product(models.Model):
     PRDBrand = models.ForeignKey('settings.Brand' ,related_name='product_brand', on_delete=models.CASCADE , blank=True, null=True ,verbose_name=_("Brand "))
     color = models.ForeignKey('Color',related_name='product_color',null=True,blank=True, on_delete=models.CASCADE)
     size = models.ForeignKey('Size',related_name='product_size',null=True,blank=True, on_delete=models.CASCADE)
-    slug = models.SlugField(null=True,blank=True)
+    slug = models.SlugField(null=True,blank=True , unique=True)
     tags = TaggableManager()
 
     def save(self,*args, **kwargs):

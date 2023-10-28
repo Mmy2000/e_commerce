@@ -10,7 +10,7 @@
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="{% static 'img4/favicon.ico'%}" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -41,7 +41,7 @@
                 </a>
             </div>
             <div class="col-lg-6 col-6 text-left">
-                <form action="{% url 'home:home_search' %}" method="GET">
+                <form action="{% url 'product:search' %}" method="GET">
                     <div class="input-group">
                         <input type="text" name="q" class="form-control" placeholder="Search for products">
                         <div class="input-group-append">

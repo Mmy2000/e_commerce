@@ -57,6 +57,18 @@ def like_or_unlike(request,id):
     
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
+def home_search(request):
+    if 'q' in request.GET:
+        q = request.GET['q']
+        if q :
+            product = Product.objects.order_by('-created_at').filter(
+            Q(name__icontains = q) |
+            Q(description__icontains = q)
+        )
+        else :
+            return render(request , 'product/home_search.html')
+    return render(request , 'product/product_list.html' , {'product':product})
+
 class ProductByCategory(ListView):
     model = Product
     paginate_by = 12
