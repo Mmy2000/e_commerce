@@ -56,7 +56,7 @@ def like_or_unlike(request,id):
         product.like.add(request.user)
     
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
-
+'''
 def home_search(request):
     if 'q' in request.GET:
         q = request.GET['q']
@@ -67,7 +67,19 @@ def home_search(request):
         )
         else :
             return render(request , 'product/home_search.html')
-    return render(request , 'product/product_list.html' , {'product':product})
+    return render(request , 'product/home_search.html' , {'product':product})
+'''
+class Search(ListView):
+    model = Product
+    paginate_by = 12
+    template_name = 'product/home_search.html'
+    def get_queryset(self) :
+        q = self.request.GET.get('q')
+        object_list = Product.objects.filter(
+            Q(name__icontains = q) |
+            Q(description__icontains = q))        
+        return object_list
+
 
 class ProductByCategory(ListView):
     model = Product
