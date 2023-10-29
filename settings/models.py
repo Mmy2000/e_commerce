@@ -55,7 +55,7 @@ class NewsLitter(models.Model):
         verbose_name_plural = ("NewsLitter")
 
     def __str__(self):
-        return self.name
+        return self.email
     
 
 class Contact(models.Model):
