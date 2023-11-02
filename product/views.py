@@ -12,6 +12,8 @@ from django.http import JsonResponse
 from django.conf import settings
 from .forms import ProductReviewForm
 from django.views.generic.edit import FormMixin
+from carts.models import CartItem
+from carts.views import _cart_id
 
 
 # Create your views here.
@@ -124,7 +126,7 @@ class ProductBysize(ListView):
         )
         return object_list
     
-
+'''
 class ProductDetail(FormMixin , DetailView):
     model = Product
     form_class = ProductReviewForm
@@ -143,4 +145,15 @@ class ProductDetail(FormMixin , DetailView):
             myform.save()
 
         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
-    
+'''
+def product_detail(request,product_slug):
+    try :
+        single_product = Product.objects.get(slug=product_slug)
+        in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(request),product=single_product).exists()
+    except Exception as e:
+        raise e
+    context = {
+        'single_product':single_product,
+        'in_cart':in_cart,
+    }
+    return render(request,'product/product_detail.html',context)

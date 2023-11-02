@@ -31,7 +31,7 @@ class Product(models.Model):
         super(Product,self).save(*args,**kwargs)
     
     def get_absolute_url(self):
-        return reverse("product:product_detail", kwargs={"slug": self.slug})
+        return reverse("product:product_detail", args=[self.slug])
 
     def __str__(self):
         return self.name
@@ -45,6 +45,29 @@ class Product(models.Model):
             return round(all_rating/len(all_reviews),2)
         else :
             return '-'
+        
+class VariationManager(models.Manager):
+    def colors(self):
+        return super(VariationManager,self).filter(variation_category='color',is_active=True)
+    
+    def sizes(self):
+        return super(VariationManager,self).filter(variation_category='size',is_active=True)
+
+variation_category_choice=(
+    ('color','color'),
+    ('size','size'),
+)
+
+class Variation(models.Model):
+    product = models.ForeignKey(Product,  on_delete=models.CASCADE)
+    variation_category = models.CharField( max_length=200 , choices=variation_category_choice)
+    variation_value = models.CharField( max_length=200 )
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(  auto_now_add=True)
+    objects = VariationManager()
+
+    def __str__(self):
+        return self.variation_value
 
 class ProductImages(models.Model):
     product = models.ForeignKey(Product,related_name='product_image',on_delete=models.CASCADE)
