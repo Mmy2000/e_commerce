@@ -17,16 +17,6 @@ class Brand(models.Model):
         return self.BRDName
     
 
-class Variant(models.Model):
-    VARName = models.CharField(max_length=40)
-    VARDesc = models.TextField(blank=True, null=True)
-
-    class Meta:
-        verbose_name = _("Variant")
-        verbose_name_plural = _("Variants")
-
-    def __str__(self):
-        return self.VARName
     
 
 class Info(models.Model):
