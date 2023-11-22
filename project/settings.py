@@ -71,6 +71,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'settings.footer.myfooter',
+                'carts.cart_context.counter',
+                'accounts.favourite_context.counter',
             ],
         },
     },

@@ -58,4 +58,6 @@ def edit_profile(requset):
 
 def user_favourites(request):
     user_favourites = Product.objects.filter(like=request.user).annotate(product_count=Count('like'))
-    return render(request,'profile/user_favourite.html',{'user_favourites':user_favourites})
+    product_count = user_favourites.count()
+    return render(request,'profile/user_favourite.html',{'user_favourites':user_favourites,
+                                                         'product_count':product_count})
