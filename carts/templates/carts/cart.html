@@ -40,7 +40,7 @@
                         <td class="align-middle">
                             <div class="input-group quantity mx-auto" style="width: 100px;">
                                 <div class="input-group-btn">
-                                    <a href="" class="btn btn-sm btn-primary btn-minus">
+                                    <a href="{% url 'carts:remove_cart' cart_item.product.id %}" class="btn btn-sm btn-primary btn-minus">
                                         <i class="fa fa-minus"></i>
                                     </a>
                                 </div>
@@ -54,7 +54,7 @@
                             </div>
                         </td>
                         <td class="align-middle">${{cart_item.sub_total}}</td>
-                        <td class="align-middle"><a href="" class="btn btn-sm btn-primary"><i
+                        <td class="align-middle"><a href="{% url 'carts:remove_cart_item' cart_item.product.id %}" class="btn btn-sm btn-primary"><i
                                     class="fa fa-times"></i></a></td>
                     </tr>
                     {% endfor %}
