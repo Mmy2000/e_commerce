@@ -14,6 +14,7 @@ from .forms import ProductReviewForm
 from django.views.generic.edit import FormMixin
 from carts.models import Cart,CartItem
 from carts.views import _cart_id
+from settings.models import Brand
 
 
 
@@ -151,11 +152,14 @@ def product_detail(request,product_slug):
     try :
         single_product = Product.objects.get(slug=product_slug)
         in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(request),product=single_product).exists()
+        brand = Brand.objects.all()
+        related = Product.objects.filter(PRDBrand=single_product.PRDBrand)
 
     except Exception as e:
         raise e
     context = {
         'single_product':single_product,
         'in_cart':in_cart,
+        'related':related
     }
     return render(request,'product/product_detail.html',context)
