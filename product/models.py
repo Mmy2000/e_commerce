@@ -45,7 +45,7 @@ class Product(models.Model):
             return round(all_rating/len(all_reviews),2)
         else :
             return '-'
-        
+'''  
 class VariationManager(models.Manager):
     def colors(self):
         return super(VariationManager,self).filter(variation_category='color',is_active=True)
@@ -57,7 +57,6 @@ variation_category_choice=(
     ('color','color'),
     ('size','size'),
 )
-
 class Variation(models.Model):
     product = models.ForeignKey(Product,  on_delete=models.CASCADE)
     variation_category = models.CharField( max_length=200 , choices=variation_category_choice)
@@ -68,6 +67,7 @@ class Variation(models.Model):
 
     def __str__(self):
         return self.variation_value
+'''
 
 class ProductImages(models.Model):
     product = models.ForeignKey(Product,related_name='product_image',on_delete=models.CASCADE)
