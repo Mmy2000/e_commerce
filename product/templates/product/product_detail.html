@@ -119,7 +119,7 @@
                         </div>
                     </div>
                     {% if in_cart %}
-                    <div><h6>This product is aready in your cart</h6><div>
+                    <div><h6>This product is aready in your <a href="{% url 'carts:cart'%}">cart</a></h6><div>
                     <a href="{% url 'carts:add_cart' single_product.id %}" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</a><br>
                     {% else %}
                     <a href="{% url 'carts:add_cart' single_product.id %}" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</a>
