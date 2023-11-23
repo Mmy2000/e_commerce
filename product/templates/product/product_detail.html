@@ -15,7 +15,7 @@
 </div>
 <!-- Page Header End -->
 
-<form action="{% url 'carts:add_cart' single_product.id %}" method="GET">
+<form action="{% url 'carts:add_cart' single_product.id %}" method="POST">
     {% csrf_token %}
     <!-- Shop Detail Start -->
     <div class="container-fluid py-5">
@@ -58,19 +58,21 @@
                 <h6>Choose Color:</h6>
 
                 <div class="d-flex mb-3">
-                    <select name="color" class="form-control">
-                        <option value="red">red</option>
-                        <option value="blue">blue</option>
-                        <option value="white">white</option>
+                    <select name="color" class="form-control" required>
+                        <option value="Choose">Select</option>
+                        {% for i in single_product.variation_set.colors  %}
+                        <option value="{{i.variation_value|lower}}"> {{i.variation_value|capfirst}}
+                        {% endfor %}
                     </select>
                 </div>
                 <h6>Choose Size:</h6>
 
                 <div class="d-flex mb-4">
-                    <select name="size" class="form-control">
-                        <option value="S">s</option>
-                        <option value="M">m</option>
-                        <option value="XL">xl</option>
+                    <select name="size" class="form-control" required>
+                        <option value="Choose">Select</option>
+                        {% for i in single_product.variation_set.sizes  %}
+                        <option value="{{i.variation_value|lower}}"> {{i.variation_value|capfirst}}
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="d-flex align-items-center mb-4 pt-2">
