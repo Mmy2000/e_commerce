@@ -120,15 +120,19 @@ def add_cart(request , product_id):
 def remove_cart(request , product_id,cart_item_id):
     
     product = get_object_or_404(Product,id=product_id)
-
-    cart = Cart.objects.get(cart_id=_cart_id(request))
-    cart_item = CartItem.objects.get(product=product , cart=cart, id=cart_item_id )
-    if cart_item.quantity > 0 :
+    try:
+        if request.user.is_authenticated:
+            cart_item = CartItem.objects.get(product=product , user=request.user , id=cart_item_id)
+        else :
+            cart = Cart.objects.get(cart_id=_cart_id(request))
+            cart_item = CartItem.objects.get(product=product , cart=cart , id=cart_item_id)
+        if cart_item.quantity > 0 :
             cart_item.quantity -= 1
             cart_item.save()
-    else:
+        else:
             cart_item.delete()
-
+    except:
+        pass
     return redirect('/cart')
 
 def remove_cart_item(request , product_id, cart_item_id):
