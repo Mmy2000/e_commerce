@@ -94,8 +94,11 @@ def cart(request,total=0 ,quantity=0,cart_items=None ):
     try:
         tax = 0
         grand_total=0
-        cart = Cart.objects.get(cart_id=_cart_id(request))
-        cart_items = CartItem.objects.filter(cart=cart,is_active=True)
+        if request.user.is_authenticated:
+             cart_items = CartItem.objects.filter(user=request.user,is_active=True)
+        else:
+            cart = Cart.objects.get(cart_id=_cart_id(request))
+            cart_items = CartItem.objects.filter(cart=cart,is_active=True)
         for cart_item in cart_items:
             if cart_item.product.discount:
                 total+=(cart_item.product.discount * cart_item.quantity)
