@@ -38,13 +38,14 @@
                     <tr>
                         <td class="align-middle"><img src="{{cart_item.product.image.url}}" alt="" style="width: 50px;">
                             {{cart_item}}<p class="text-muted small"><br>
-												{% if cart_item.variations.all %}
-												{% for item in cart_item.variations.all  %}
-												{{item.variation_category|capfirst}} :
-												{{item.variation_value|capfirst}}<br>
-												{% endfor %}
-												{% endif %}
-											</p></td>
+                                {% if cart_item.variations.all %}
+                                {% for item in cart_item.variations.all  %}
+                                {{item.variation_category|capfirst}} :
+                                {{item.variation_value|capfirst}}<br>
+                                {% endfor %}
+                                {% endif %}
+                            </p>
+                        </td>
                         {% if cart_item.product.discount %}
                         <td class="align-middle">${{cart_item.product.discount}}</td>
                         {% else %}
@@ -61,15 +62,21 @@
                                 <input type="text" class="form-control form-control-sm bg-secondary text-center"
                                     value="{{cart_item.quantity}}">
                                 <div class="input-group-btn">
-                                    <a href="{% url 'carts:add_cart' cart_item.product.id %}"
-                                        class="btn btn-sm btn-primary btn-plus">
-                                        <i class="fa fa-plus"></i>
-                                    </a>
+                                    <form action="{% url 'carts:add_cart' cart_item.product.id %}" method="POST">
+                                        {% csrf_token %}
+                                        {% for item in cart_item.variations.all %}
+                                        <input type="hidden" name="{{item.variation_category | lower}}"
+                                            value="{{item.variation_value | capfirst}}">
+                                        {% endfor %}
+                                        <button class="btn btn-sm btn-primary btn-plus" type="submit" id="button-minus"> <i
+                                                class="fa fa-plus"></i> </button>
+                                    </form>
                                 </div>
                             </div>
                         </td>
                         <td class="align-middle">${{cart_item.sub_total}}</td>
-                        <td class="align-middle"><a href="{% url 'carts:remove_cart_item' cart_item.product.id cart_item.id%}"
+                        <td class="align-middle"><a
+                                href="{% url 'carts:remove_cart_item' cart_item.product.id cart_item.id%}"
                                 class="btn btn-sm btn-primary"><i class="fa fa-times"></i></a></td>
                     </tr>
                     {% endfor %}
@@ -105,7 +112,8 @@
                         <h5 class="font-weight-bold">${{grand_total}}</h5>
                     </div>
                     <button class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button>
-                    <a href="{% url 'product:product_list'%}" class="btn btn-block btn-primary my-3 py-3">Continue Shopping</a>
+                    <a href="{% url 'product:product_list'%}" class="btn btn-block btn-primary my-3 py-3">Continue
+                        Shopping</a>
                 </div>
             </div>
         </div>
