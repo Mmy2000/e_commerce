@@ -58,12 +58,13 @@
                     <i class="fas fa-heart text-primary"></i>
                     <span class="badge">{{product_count}}</span>
                 </a>
+                {% endif %}
                 <a href="{% url 'carts:cart'%}" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
 
                     <span class="badge">{{cart_count}}</span>
                 </a>
-            {% endif %}
+            
             </div>
         </div>
         <!-- Navbar Start -->
