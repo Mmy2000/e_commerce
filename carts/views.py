@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from product.models import Product
 from .models import Cart , CartItem
+from django.http import HttpResponse
 
 
 def _cart_id(request):
