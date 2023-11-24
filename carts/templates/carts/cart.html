@@ -65,10 +65,9 @@
                                     <form action="{% url 'carts:add_cart' cart_item.product.id %}" method="POST">
                                         {% csrf_token %}
                                         {% for item in cart_item.variations.all %}
-                                        <input type="hidden"
-                                            class="form-control form-control-sm bg-secondary text-center"
-                                            name="{{item.variation_category | lower}}"
-                                            value="{{item.variation_value | capfirst}}">
+                                        <input type="hidden" class="form-control form-control-sm bg-secondary text-center"
+                                            name="{{ item.variation_category | lower }}"
+                                            value="{{ item.variation_value | capfirst }}">
                                         {% endfor %}
                                         <button class="btn btn-sm btn-primary btn-plus" type="submit"> <i
                                                 class="fa fa-plus"></i> </button>
@@ -78,7 +77,8 @@
                         </td>
                         <td class="align-middle">${{cart_item.sub_total}}</td>
                         <td class="align-middle"><a
-                                href="{% url 'carts:remove_cart_item' cart_item.product.id cart_item.id%}" onclick="return confirm('Are You Sure You Want To Delete This Item ?')"
+                                href="{% url 'carts:remove_cart_item' cart_item.product.id cart_item.id%}"
+                                onclick="return confirm('Are You Sure You Want To Delete This Item ?')"
                                 class="btn btn-sm btn-primary"><i class="fa fa-times"></i></a></td>
                     </tr>
                     {% endfor %}
@@ -113,7 +113,8 @@
                         <h5 class="font-weight-bold">Total</h5>
                         <h5 class="font-weight-bold">${{grand_total}}</h5>
                     </div>
-                    <a href="{% url 'carts:checkout'%}" class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</a>
+                    <a href="{% url 'carts:checkout'%}" class="btn btn-block btn-primary my-3 py-3">Proceed To
+                        Checkout</a>
                     <a href="{% url 'product:product_list'%}" class="btn btn-block btn-primary my-3 py-3">Continue
                         Shopping</a>
                 </div>

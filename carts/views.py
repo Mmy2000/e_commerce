@@ -4,7 +4,11 @@ from .models import Cart , CartItem
 from django.http import HttpResponse
 from product.models import Variation
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.crypto import get_random_string
 
+def get_csrf_token():
+    return get_random_string(128)
 
 def _cart_id(request):
     cart = request.session.session_key
@@ -12,6 +16,7 @@ def _cart_id(request):
         cart = request.session.create()
     return cart
 
+@csrf_exempt
 def add_cart(request , product_id):
     current_user = request.user
     product = Product.objects.get(id=product_id)
@@ -149,6 +154,7 @@ def remove_cart_item(request , product_id, cart_item_id):
     return redirect('/cart')
 
 @login_required(login_url='login')
+@csrf_exempt
 def cart(request,total=0 ,quantity=0,cart_items=None ):
     try:
         tax = 0
