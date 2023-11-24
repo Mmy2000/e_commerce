@@ -64,7 +64,7 @@
 
                     <span class="badge">{{cart_count}}</span>
                 </a>
-            
+
             </div>
         </div>
         <!-- Navbar Start -->
@@ -123,7 +123,8 @@
                                     <div class="dropdown-menu rounded-0 m-0">
                                         <a href="{% url 'accounts:profile' %}" class="dropdown-item">Profile</a>
                                         <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
-                                        <a href="{% url 'accounts:user_favourites' %}" class="dropdown-item">Favourit</a>
+                                        <a href="{% url 'accounts:user_favourites' %}"
+                                            class="dropdown-item">Favourit</a>
                                     </div>
                                 </div>
 
@@ -234,7 +235,7 @@
                         </div>
                         <div id="main_form_div" class="col-md-4 mb-5">
                             <h5 class="font-weight-bold text-dark mb-4">Newsletter</h5>
-                            <form id="newsletters_form" action="{% url 'home:newsletter' %}  method=" POST"">
+                            <form id="newsletters_form" action="{% url 'home:newsletter2' %}" method="POST">
                                 {% csrf_token %}
                                 <div class="form-group">
                                     <input type="email" name="emailinput" class="form-control border-0 py-4"
@@ -246,10 +247,8 @@
                                 </div>
                             </form>
                         </div>
-                        <div id="main_form_div" class="col-md-4 mb-5">
-                            <h5 id="success_div" style="display: none;" class="font-weight-bold text-dark mb-4">
-                                Subcribed
-                                Successfuly</h5>
+                        <div id="success_div" style="display: none;" class="col-md-4 mb-5">
+                            <h5 class="font-weight-bold text-dark mb-4">Subcribed Successfuly</h5>
                         </div>
                         <div class="col-lg-6 text-center text-lg-right">
                             <div class="d-inline-flex align-items-center">

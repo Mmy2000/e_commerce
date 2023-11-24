@@ -3,7 +3,8 @@ from product.models import ProductCategory ,Product
 from django.db.models import Count
 from django.db.models.query_utils import Q
 from django.shortcuts import render
-
+from .models import NewsLitter
+from django.http import JsonResponse
 
 
 
@@ -17,4 +18,9 @@ def myfooter(request):
         'brands_footer':brands_footer,
         }
     return(context)
+
+def news_letters_subscribe(request):
+    email = request.POST.get('emailinput')
+    NewsLitter.objects.create(email=email)
+    return JsonResponse({'done':'done'})
 
