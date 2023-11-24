@@ -78,7 +78,7 @@
                         </td>
                         <td class="align-middle">${{cart_item.sub_total}}</td>
                         <td class="align-middle"><a
-                                href="{% url 'carts:remove_cart_item' cart_item.product.id cart_item.id%}"
+                                href="{% url 'carts:remove_cart_item' cart_item.product.id cart_item.id%}" onclick="return confirm('Are You Sure You Want To Delete This Item ?')"
                                 class="btn btn-sm btn-primary"><i class="fa fa-times"></i></a></td>
                     </tr>
                     {% endfor %}
