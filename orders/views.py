@@ -3,6 +3,8 @@ from carts.models import CartItem
 from .forms import OrderForm
 from .models import Order, Payment, OrderProduct
 import datetime
+import json
+
 
 # Create your views here.
 def place_order(request, total=0, quantity=0,):
@@ -69,4 +71,20 @@ def place_order(request, total=0, quantity=0,):
         return redirect('checkout')
     
 def payments(request):
+    body = json.loads(request.body)
+    order = Order.objects.get(user=request.user, is_orderd=False, order_number=body['orderID'])
+    # Store transaction details inside Payment model
+    payment = Payment(
+        user = request.user,
+        payment_id = body['transID'],
+        payment_method = body['payment_method'],
+        payment_paid = order.order_total,
+        status = body['status'],
+    )
+    payment.save()
+    order.payment = payment
+    order.is_orderd = True
+    order.save()
+
+
     return render(request,'payment.html')
