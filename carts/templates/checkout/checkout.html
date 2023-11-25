@@ -14,7 +14,7 @@
 </div>
 
 <!-- Checkout Start -->
-<form method="POST" action="">
+<form method="POST" action="{% url 'orders:place_order' %}">
     {% csrf_token %}
     <div class="container-fluid pt-5">
         <div class="row px-xl-5">
@@ -60,7 +60,7 @@
                         </div>
                         <div class="col-md-6 form-group">
                             <label>ZIP Code</label>
-                            <input class="form-control" type="text" placeholder="123">
+                            <input class="form-control" name="zip_code" type="text" placeholder="123">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Order Note</label>
