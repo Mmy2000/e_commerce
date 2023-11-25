@@ -111,7 +111,13 @@ def payments(request):
         orderproduct.save()
 
 
-        
+        # Reduce the quantity of the sold products
+        product = Product.objects.get(id=item.product_id)
+        product.stock -= item.quantity
+        product.save()
+
+    # Clear cart
+    CartItem.objects.filter(user=request.user).delete()
 
 
     return render(request,'payment.html')
