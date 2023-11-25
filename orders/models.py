@@ -57,9 +57,7 @@ class OrderProduct(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product = models.ForeignKey("product.Product", on_delete=models.CASCADE)
-    variation = models.ForeignKey("product.Variation", on_delete=models.CASCADE)
-    color = models.CharField(max_length=50)
-    size = models.CharField(max_length=50)
+    variations = models.ManyToManyField("product.Variation",blank=True)
     quantity = models.IntegerField()
     product_price = models.FloatField()
     ordered = models.BooleanField(default=False)
@@ -67,4 +65,4 @@ class OrderProduct(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.product.product_name
+        return self.product.name
