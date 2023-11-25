@@ -13,6 +13,7 @@ from taggit.managers import TaggableManager
 class Product(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='product/')
+    stock = models.IntegerField()
     price = models.IntegerField(default=0)
     discount = models.IntegerField(default=0)
     description = models.TextField(max_length=10000)

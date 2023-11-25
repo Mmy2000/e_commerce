@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'product',
     'settings',
     'carts',
+    'orders',
     'django_filters',
     "django_bootstrap5",
     'taggit',
