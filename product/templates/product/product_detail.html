@@ -46,17 +46,17 @@
                 <div class="d-flex mb-3">
                     <div class="text-primary mr-2">
                         <span>
-                                    <i class="fa fa-star{% if single_product.avr_review < 0.5%}-o{% elif single_product.avr_review >= 0.5 and single_product.avr_review < 1%}-half-o{%endif%}"
-                                        aria-hidden="true"></i>
-                                    <i class="fa fa-star{% if single_product.avr_review < 1.5%}-o{% elif single_product.avr_review >= 1.5 and single_product.avr_review < 2%}-half-o{%endif%}"
-                                        aria-hidden="true"></i>
-                                    <i class="fa fa-star{% if single_product.avr_review < 2.5%}-o{% elif single_product.avr_review >= 2.5 and single_product.avr_review < 3%}-half-o{%endif%}"
-                                        aria-hidden="true"></i>
-                                    <i class="fa fa-star{% if single_product.avr_review < 3.5%}-o{% elif single_product.avr_review >= 3.5 and single_product.avr_review < 4%}-half-o{%endif%}"
-                                        aria-hidden="true"></i>
-                                    <i class="fa fa-star{% if single_product.avr_review < 4.5%}-o{% elif single_product.avr_review >= 4.5 and single_product.avr_review < 5%}-half-o{%endif%}"
-                                        aria-hidden="true"></i>
-                                </span>
+                            <i class="fa fa-star{% if single_product.avr_review < 0.5%}-o{% elif single_product.avr_review >= 0.5 and single_product.avr_review < 1%}-half-o{%endif%}"
+                                aria-hidden="true"></i>
+                            <i class="fa fa-star{% if single_product.avr_review < 1.5%}-o{% elif single_product.avr_review >= 1.5 and single_product.avr_review < 2%}-half-o{%endif%}"
+                                aria-hidden="true"></i>
+                            <i class="fa fa-star{% if single_product.avr_review < 2.5%}-o{% elif single_product.avr_review >= 2.5 and single_product.avr_review < 3%}-half-o{%endif%}"
+                                aria-hidden="true"></i>
+                            <i class="fa fa-star{% if single_product.avr_review < 3.5%}-o{% elif single_product.avr_review >= 3.5 and single_product.avr_review < 4%}-half-o{%endif%}"
+                                aria-hidden="true"></i>
+                            <i class="fa fa-star{% if single_product.avr_review < 4.5%}-o{% elif single_product.avr_review >= 4.5 and single_product.avr_review < 5%}-half-o{%endif%}"
+                                aria-hidden="true"></i>
+                        </span>
                     </div>
                     <small class="pt-1">({{single_product.count_review}} Reviews)</small>
                 </div>
@@ -229,8 +229,11 @@
                                 <textarea name="review" rows="4" class="form-control" value="Your Rating"></textarea>
                                 <br>
                                 {% if user.is_authenticated %}
-
+                                {% if orderproduct %}
                                 <input type="submit" value="Submit Review" class="btn btn-primary">
+                                {% else %}
+                                <p>You must purchase this product to post a review.</p>
+                                {% endif %}
                                 {% else %}
                                 <p>You must be logged in to post a review. <span><a href="{% url 'login'%}">Login
                                             now</a></span>
