@@ -6,6 +6,7 @@ from django.urls import reverse
 from accounts.models import Profile
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
+from django.db.models import Avg , Count
 
 
 
@@ -37,15 +38,20 @@ class Product(models.Model):
     def __str__(self):
         return self.name
     
-    def get_avg_rating(self):
-        all_reviews = self.review_product.all()
-        all_rating = 0
-        if len(all_reviews)>0:
-            for review in all_reviews:
-                all_rating += review.rate
-            return round(all_rating/len(all_reviews),2)
-        else :
-            return '-'
+    def avr_review(self):
+        reviews = ReviewRating.objects.filter(product=self , status=True).aggregate(average=Avg('rating'))
+        avg =0
+        if reviews['average'] is not None:
+            avg = float(reviews['average'])
+        return avg
+    
+    def count_review(self):
+        reviews = ReviewRating.objects.filter(product=self , status=True).aggregate(count=Count('rating'))
+        count = 0
+        if reviews['count'] is not None:
+            count = int(reviews['count'])
+        return count
+    
 class VariationManager(models.Manager):
     def colors(self):
         return super(VariationManager,self).filter(variation_category='color',is_active=True)

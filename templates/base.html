@@ -192,6 +192,16 @@
                 </div>
             </div>
         </div>
+        {% if messages %}
+        <div class="messages">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {% for message in messages %}
+                <strong></strong> {{ message }}
+                {% endfor %}
+
+            </div>
+        </div>
+        {% endif %}
 
         {% block body %}
         {% endblock body %}
