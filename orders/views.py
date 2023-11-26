@@ -7,6 +7,9 @@ import datetime
 import json
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+from django.http import HttpResponse, JsonResponse
+from django.urls import reverse
+
 
 
 # Create your views here.
@@ -16,7 +19,7 @@ def place_order(request, total=0, quantity=0,):
     cart_items = CartItem.objects.filter(user=current_user)
     cart_count = cart_items.count()
     if cart_count <= 0:
-        return redirect('product_list')
+        return redirect(reverse('product:product_list'))
     
     grand_total = 0
     tax = 0
@@ -131,5 +134,17 @@ def payments(request):
     send_email = EmailMessage(mail_subject, message, to=[to_email])
     send_email.send()
 
+    # Send order number and transaction id back to sendData method via JsonResponse
+    data = {
+        'order_number': order.order_number,
+        'transID': payment.payment_id,
+    }
+    return JsonResponse(data)
 
-    return render(request,'payment.html')
+
+
+def order_complete(request):
+
+    return render(request, 'order_complete.html')
+    
+    
