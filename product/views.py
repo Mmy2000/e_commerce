@@ -1,6 +1,6 @@
 from django.shortcuts import render , get_object_or_404 , redirect
 from django.views.generic import ListView , DetailView
-from .models import Product
+from .models import Product , ReviewRating
 from .models import  ProductCategory , Color, Size 
 from django.db.models import Count
 from django_filters.views import FilterView
@@ -10,11 +10,12 @@ from django.http import HttpResponseRedirect
 from accounts.models import Profile
 from django.http import JsonResponse
 from django.conf import settings
-from .forms import ProductReviewForm
 from django.views.generic.edit import FormMixin
 from carts.models import Cart,CartItem
 from carts.views import _cart_id
 from settings.models import Brand
+from django.contrib import messages
+from .forms import ReviewForm
 
 
 
@@ -163,3 +164,26 @@ def product_detail(request,product_slug):
         'related':related
     }
     return render(request,'product/product_detail.html',context)
+
+def submit_review(request,product_id):
+    url = request.META.get('HTTP_REFERER')
+    if request.method =="POST":
+        try:
+            reviews = ReviewRating.objects.get(user__id=request.user.id , product__id=product_id)
+            form = ReviewForm(request.POST , instance=reviews)
+            form.save()
+            messages.success(request,'Thank You , Your Review has been updated.')
+            return redirect(url)
+        except ReviewRating.DoesNotExist:
+            form = ReviewForm(request.POST)
+            if form.is_valid():
+                data = ReviewRating()
+                data.subject = form.cleaned_data['subject']
+                data.rating = form.cleaned_data['rating']
+                data.review = form.cleaned_data['review']
+                data.ip = request.META.get('REMOTE_ADDR')
+                data.product_id = product_id
+                data.user_id = request.user.id
+                data.save()
+                messages.success(request,'Thank You , Your Review has been submitted.')
+                return redirect(url)

@@ -23,13 +23,13 @@
     padding-right: 0;
 }
 input:checked ~ label,label:hover ~ label{
-    color: #ffb503;
+    color: #D19C97;
 }
 input:checked + label:hover,input:checked ~ label:hover,input:checked ~ label:hover ~ label,label:hover ~ input:checked ~ label{
-    color: #cc9000;
+    color: #9d5959;
 }
 .rating-star i{
-    color: #ffb503 !important;
+    color: #D19C97 !important;
 }
 ul.thumb {
     margin: 0 auto;

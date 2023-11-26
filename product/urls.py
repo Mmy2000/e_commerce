@@ -13,5 +13,5 @@ urlpatterns = [
     path('brand/<str:slug>/' , views.ProductByBrand.as_view() , name='product_by_brand'),
     path('color/<str:slug>/' , views.ProductByColor.as_view() , name='product_by_color'),
     path('size/<str:slug>/' , views.ProductBysize.as_view() , name='product_by_size'),
-
+    path('submit_review/<int:product_id>/',views.submit_review ,name='submit_review'),
 ]
