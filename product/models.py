@@ -89,15 +89,6 @@ class ProductCategory(models.Model):
     def __str__(self):
         return self.name
     
-class ProductReview(models.Model):
-    auther = models.ForeignKey(User, related_name="review_auther", on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, related_name="review_product", on_delete=models.CASCADE)
-    rate = models.IntegerField(default=0)
-    feedback = models.TextField(max_length=2000)
-    created_at = models.DateTimeField( default=timezone.now)
-
-    def __str__(self):
-        return str(self.product)
 
 class Color(models.Model):
     name = models.CharField(max_length=50 )

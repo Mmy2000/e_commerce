@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Product , ProductCategory , ProductImages ,  Color , Size , ProductReview ,Variation,ReviewRating
+from . models import Product , ProductCategory , ProductImages ,  Color , Size  ,Variation,ReviewRating
 
 # Register your models here.
 admin.site.register(Product)
@@ -8,7 +8,6 @@ admin.site.register(ProductImages)
 
 admin.site.register(Color)
 admin.site.register(Size)
-admin.site.register(ProductReview)
 
 
 class VariationAdmin(admin.ModelAdmin):
