@@ -8,10 +8,10 @@ urlpatterns = [
     path('search/' , views.Search.as_view() , name = 'search'),
     path('<slug:product_slug>/',views.product_detail ,name='product_detail'),
     path('<int:id>/like_or_dislike',views.like_or_unlike , name='like'),
-    path('category/<str:slug>' , views.ProductByCategory.as_view() , name='product_by_category'),
-    path('tags/<str:slug>' , views.ProductByTags.as_view() , name='product_by_tags'),
-    path('brand/<str:slug>' , views.ProductByBrand.as_view() , name='product_by_brand'),
-    path('color/<str:slug>' , views.ProductByColor.as_view() , name='product_by_color'),
-    path('size/<str:slug>' , views.ProductBysize.as_view() , name='product_by_size'),
+    path('category/<str:slug>/' , views.ProductByCategory.as_view() , name='product_by_category'),
+    path('tags/<str:slug>/' , views.ProductByTags.as_view() , name='product_by_tags'),
+    path('brand/<str:slug>/' , views.ProductByBrand.as_view() , name='product_by_brand'),
+    path('color/<str:slug>/' , views.ProductByColor.as_view() , name='product_by_color'),
+    path('size/<str:slug>/' , views.ProductBysize.as_view() , name='product_by_size'),
 
 ]
