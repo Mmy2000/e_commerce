@@ -16,6 +16,8 @@ from carts.views import _cart_id
 from settings.models import Brand
 from django.contrib import messages
 from .forms import ReviewForm
+from orders.models import OrderProduct
+
 
 
 
@@ -156,6 +158,13 @@ def product_detail(request,product_slug):
         brand = Brand.objects.all()
         related = Product.objects.filter(PRDBrand=single_product.PRDBrand)
         reviews = ReviewRating.objects.filter(product_id=single_product.id , status=True)
+        if request.user.is_authenticated:
+            try:
+                orderproduct = OrderProduct.objects.filter(user=request.user , product_id=single_product.id).exists()
+            except OrderProduct.DoesNotExist:
+                orderproduct = None
+        else :
+            orderproduct = None
 
     except Exception as e:
         raise e
@@ -164,6 +173,7 @@ def product_detail(request,product_slug):
         'in_cart':in_cart,
         'related':related,
         'reviews':reviews,
+        'orderproduct':orderproduct,
     }
     return render(request,'product/product_detail.html',context)
 
