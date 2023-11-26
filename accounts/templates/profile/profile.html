@@ -30,8 +30,8 @@
                       <h4>{{profile.full_name}}</h4>
                       <p class="text-muted mb-1">{{profile.headline}}</p>
                       <p class="text-muted font-size-sm">{{profile.full_address}}</p>
-                      <button class="btn btn-primary">Follow</button>
-                      <button class="btn btn-outline-primary">Message</button>
+                      <a href="{% url 'accounts:user_favourites' %}" class="btn btn-primary">Favorite</a>
+                      <a class="btn btn-outline-primary">Orders</a>
                     </div>
                   </div>
                 </div>
