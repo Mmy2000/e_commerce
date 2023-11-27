@@ -62,8 +62,6 @@
                                                 <th>Products</th>
                                                 <th>Price</th>
                                                 <th>Quantity</th>
-                                                <th>Total</th>
-                                                <th>Tax</th>
                                             </tr>
                                         </thead>
                                         <tbody class="align-middle">
@@ -94,8 +92,6 @@
 
                                                     </div>
                                                 </td>
-                                                <td class="align-middle">${{subtotal}}</td>
-                                                <td class="align-middle">${{order.tax}}</td>
 
                                             </tr>
                                             {% endfor %}
@@ -104,6 +100,8 @@
                                 </div>
                             </div>
                             <div class="text-center">
+                                <h5 class="text-center">Order SubTotal & Tax</h5>
+                                <h6 class="text-center">${{subtotal}} + {{order.tax}}</h6>
                                 <h5 class="text-center">Order Total</h5>
                                 <h6 class="text-center">${{order.order_total}} USD</h6>
                             </div>
