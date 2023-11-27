@@ -66,7 +66,7 @@
                 <h5 class="font-weight-semi-bold mb-4">Filter by color</h5>
                 {% for color in colors %}
                 <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                    <input type="checkbox" class="custom-control-input" checked id="{{color}}">
+                    <input  class="custom-control-input" checked id="{{color}}">
                     <label>{{color}}</label>
                     <a href="{% url 'product:product_by_color' color %}"><span
                             class="badge border font-weight-normal">{{color.product_count}}</span></a>
@@ -92,7 +92,7 @@
                 <h5 class="font-weight-semi-bold mb-4">Filter by category</h5>
                 {% for category in categories %}
                 <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                    <input type="checkbox" class="custom-control-input" checked id="{{category}}">
+                    <input  class="custom-control-input" checked id="{{category}}">
                     <label>{{category}}</label>
                     <a href="{% url 'product:product_by_category' category %}"><span
                             class="badge border font-weight-normal">{{category.product_count}}</span></a>
