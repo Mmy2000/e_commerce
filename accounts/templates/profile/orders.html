@@ -17,15 +17,19 @@
                         </tr>
                     </thead>
                     <tbody class="align-middle">
+                        {% for order in orders %}
                         <tr>
-                            <td class="align-middle">Colorful Stylish Shirt</td>
-                            <td class="align-middle">$150</td>
+                            
+                            <td class="align-middle">{{order.order_number}}</td>
+                            <td class="align-middle">${{order.full_name}}</td>
                             <td class="align-middle">
-                                
+                                {{order.phone}}
                             </td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle"></td>
+                            <td class="align-middle">${{order.order_total}}</td>
+                            <td class="align-middle">{{order.created_at}}</td>
+                           
                         </tr>
+                         {% endfor %}
                     </tbody>
                 </table>
             </div>

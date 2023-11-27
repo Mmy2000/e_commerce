@@ -5,6 +5,7 @@ from product.models import Product
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate , login 
 from django.db.models import Count
+from orders.models import Order
 
 
 
@@ -63,4 +64,8 @@ def user_favourites(request):
                                                          'product_count':product_count})
 
 def orders(request):
-    return render(request,'profile/orders.html')
+    orders = Order.objects.filter(user=request.user,is_orderd=True).order_by('-created_at')
+    context = {
+        'orders':orders,
+    }
+    return render(request,'profile/orders.html',context)
