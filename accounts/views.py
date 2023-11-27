@@ -61,3 +61,6 @@ def user_favourites(request):
     product_count = user_favourites.count()
     return render(request,'profile/user_favourite.html',{'user_favourites':user_favourites,
                                                          'product_count':product_count})
+
+def orders(request):
+    return render(request,'profile/orders.html')
