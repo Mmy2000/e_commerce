@@ -31,8 +31,11 @@ def signup(request):
 
 def profile(request):
     profile=Profile.objects.get(user=request.user)
+    orders = Order.objects.order_by('-created_at').filter(user_id=request.user.id,is_orderd=True)
+    orders_count = orders.count()
 
-    return render(request,'profile/profile.html',{'profile':profile})
+    return render(request,'profile/profile.html',{'profile':profile,
+                                                  'orders_count':orders_count,})
 
 
 def edit_profile(requset):
