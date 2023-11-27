@@ -20,7 +20,7 @@
                         {% for order in orders %}
                         <tr>
                             
-                            <td class="align-middle">{{order.order_number}}</td>
+                            <td class="align-middle"><a href="{% url 'accounts:order_detail' order.order_number %}">{{order.order_number}}</a></td>
                             <td class="align-middle">${{order.full_name}}</td>
                             <td class="align-middle">
                                 {{order.phone}}

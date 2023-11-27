@@ -69,3 +69,12 @@ def orders(request):
         'orders':orders,
     }
     return render(request,'profile/orders.html',context)
+
+def order_detail(request,order_id):
+    profile=Profile.objects.get(user=request.user)
+    orders = Order.objects.get(order_number=order_id)
+    context = {
+        'profile':profile,
+        'orders':orders,
+    }
+    return render(request,'profile/order_detail.html',context)
