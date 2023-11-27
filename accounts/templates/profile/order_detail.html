@@ -62,12 +62,10 @@
                                                 <th>Products</th>
                                                 <th>Price</th>
                                                 <th>Quantity</th>
-                                                <th>Total</th>
-                                                <th>Tax</th>
                                             </tr>
                                         </thead>
                                         <tbody class="align-middle">
-                                            {% for cart_item in ordered_products %}
+                                            {% for cart_item in order_detail %}
                                             <tr>
                                                 <td class="align-middle"><img src="{{cart_item.product.image.url}}"
                                                         alt="" style="width: 50px;">
@@ -94,9 +92,6 @@
 
                                                     </div>
                                                 </td>
-                                                <td class="align-middle">${{subtotal}}</td>
-                                                <td class="align-middle">${{order.tax}}</td>
-
                                             </tr>
                                             {% endfor %}
                                         </tbody>
@@ -104,8 +99,10 @@
                                 </div>
                             </div>
                             <div class="text-center">
+                                <h5 class="text-center">Order SubTotal & Tax</h5>
+                                <h6 class="text-center">${{subtotal}} + ${{orders.tax}}</h6>
                                 <h5 class="text-center">Order Total</h5>
-                                <h6 class="text-center">${{order.order_total}} USD</h6>
+                                <h6 class="text-center">${{orders.order_total}} USD</h6>
                             </div>
                             <br>
                             <div class="invoice-footer mt25">
