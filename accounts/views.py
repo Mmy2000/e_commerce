@@ -6,6 +6,14 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate , login 
 from django.db.models import Count
 from orders.models import Order , OrderProduct
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes
+from django.contrib.auth.tokens import default_token_generator
+from django.core.mail import EmailMessage
+from django.urls import reverse
+from django.contrib import messages
 
 
 
@@ -58,6 +66,32 @@ def edit_profile(requset):
         'user_form':user_form,
         'profile_form':profile_form
     })
+
+def forgotPassword(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        if User.objects.filter(email=email).exists():
+            user = User.objects.get(email__exact=email)
+
+            # Reset password email
+            current_site = get_current_site(request)
+            mail_subject = 'Reset Your Password'
+            message = render_to_string('registration/password_reset_email.html', {
+                'user': user,
+                'domain': current_site,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': default_token_generator.make_token(user),
+            })
+            to_email = email
+            send_email = EmailMessage(mail_subject, message, to=[to_email])
+            send_email.send()
+
+            messages.success(request, 'Password reset email has been sent to your email address.')
+            return redirect('login')
+        else:
+            messages.error(request, 'Account does not exist!')
+            return redirect(reverse('accounts:forgotPassword'))
+    return render(request, 'registration/password_reset_form.html')
 
 
 def user_favourites(request):
