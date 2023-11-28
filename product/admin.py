@@ -1,13 +1,24 @@
 from django.contrib import admin
 from . models import Product , ProductCategory , ProductImages ,  Color , Size  ,Variation,ReviewRating
+import admin_thumbnails
 
 # Register your models here.
-admin.site.register(Product)
 admin.site.register(ProductCategory)
 admin.site.register(ProductImages)
 
 admin.site.register(Color)
 admin.site.register(Size)
+
+@admin_thumbnails.thumbnail('image')
+class ProductGallaryInline(admin.TabularInline):
+    model = ProductImages
+    extra = 1
+
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('name' , 'price' , 'stock'  , 'created_at' )
+    inlines = [ProductGallaryInline]
+
+admin.site.register(Product,ProductAdmin)
 
 
 class VariationAdmin(admin.ModelAdmin):
