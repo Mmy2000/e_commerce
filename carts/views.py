@@ -159,6 +159,7 @@ def cart(request,total=0 ,quantity=0,cart_items=None ):
     try:
         tax = 0
         grand_total=0
+        offer = 0
         if request.user.is_authenticated:
              cart_items = CartItem.objects.filter(user=request.user,is_active=True)
         else:
@@ -168,6 +169,7 @@ def cart(request,total=0 ,quantity=0,cart_items=None ):
             if cart_item.product.discount:
                 total+=(cart_item.product.discount * cart_item.quantity)
                 quantity+=cart_item.quantity
+                offer = cart_item.product.discount / cart_item.product.price * 100
             else:
                 total+=(cart_item.product.price * cart_item.quantity)
                 quantity+=cart_item.quantity
@@ -181,6 +183,7 @@ def cart(request,total=0 ,quantity=0,cart_items=None ):
         'quantity':quantity,
         'tax':tax,
         'grand_total':grand_total,
+        'offer':offer,
     }
     return render(request,'carts/cart.html',context)
 
