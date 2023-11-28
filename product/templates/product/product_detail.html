@@ -42,13 +42,14 @@
             </div>
 
             <div class="col-lg-7 pb-5">
-                <h3 class="font-weight-semi-bold">{{single_product}} </h3>
+                
                 {% if single_product.offer %}
                 <div class="product-badge2 bg-success border-default text-body">{{single_product.offer}}%OFF</div>
                 {% endif %}
                 {% if single_product.stock == 0 %}
                 <div class="product-badge2 bg-secondary2 border-default text-body">Out of stock</div>
                 {% endif %}
+                <h3 class="font-weight-semi-bold">{{single_product}} </h3>
                 <div class="d-flex mb-3">
                     <div class="text-primary mr-2">
                         <span>
@@ -263,6 +264,12 @@
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <h6 class="text-truncate mb-3">{{product.name}}</h6>
+                        {% if product.offer %}
+                            <div class="product-badge2 bg-success border-default text-body">{{product.offer}}%OFF</div>
+                            {% endif %}
+                            {% if product.stock == 0 %}
+                            <div class="product-badge2 bg-secondary2 border-default text-body">Out of stock</div>
+                            {% endif %}
                         <div class="d-flex justify-content-center">
                             {% if product.discount > 0 %}
                             <h6>${{product.discount}}</h6>
