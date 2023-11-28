@@ -31,6 +31,12 @@ class Product(models.Model):
         if not self.slug:
             self.slug=slugify(self.name)
         super(Product,self).save(*args,**kwargs)
+
+    def offer(self):
+        offer = 0
+        if self.discount > 0:
+            offer =int( 100 - (self.discount / self.price * 100))
+        return offer
     
     def get_absolute_url(self):
         return reverse("product:product_detail", args=[self.slug])

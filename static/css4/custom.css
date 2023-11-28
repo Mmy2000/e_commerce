@@ -15,7 +15,9 @@
 }
 
 
-
+.bg-secondary2 {
+    background-color: #dc3545  !important;
+}
 
 .bg-success {
     background-color: #21bd4a  !important;
