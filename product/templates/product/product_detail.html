@@ -43,7 +43,12 @@
 
             <div class="col-lg-7 pb-5">
                 <h3 class="font-weight-semi-bold">{{single_product}} </h3>
-                <div class="product-badge2 bg-success border-default text-body">{{offer}}%OFF</div>
+                {% if single_product.offer %}
+                <div class="product-badge2 bg-success border-default text-body">{{single_product.offer}}%OFF</div>
+                {% endif %}
+                {% if single_product.stock == 0 %}
+                            <div class="product-badge2 bg-secondary2 border-default text-body">Out of stock</div>
+                            {% endif %}
                 <div class="d-flex mb-3">
                     <div class="text-primary mr-2">
                         <span>
@@ -98,6 +103,7 @@
                         </div>
                     </div>
                     {% if user.is_authenticated %}
+
                     <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
                     {% else %}
                     <p>You Must <a href="{% url 'login'%}">login</a> to add this product to the cart</p>

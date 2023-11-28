@@ -157,8 +157,6 @@ def product_detail(request,product_slug):
         in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(request),product=single_product).exists()
         related = Product.objects.filter(PRDBrand=single_product.PRDBrand)
         reviews = ReviewRating.objects.filter(product_id=single_product.id , status=True)
-        if single_product.discount:
-                offer =100-( single_product.discount / single_product.price * 100)
         if request.user.is_authenticated:
             try:
                 orderproduct = OrderProduct.objects.filter(user=request.user , product_id=single_product.id).exists()
@@ -175,7 +173,6 @@ def product_detail(request,product_slug):
         'related':related,
         'reviews':reviews,
         'orderproduct':orderproduct,
-        'offer':offer,
     }
     return render(request,'product/product_detail.html',context)
 
