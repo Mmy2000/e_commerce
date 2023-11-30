@@ -6,6 +6,8 @@ from product.models import Variation
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.crypto import get_random_string
+from django.http import HttpResponseRedirect
+
 
 def get_csrf_token():
     return get_random_string(128)
@@ -66,7 +68,7 @@ def add_cart(request , product_id):
                 cart_item.variations.clear()
                 cart_item.variations.add(*product_variation)
             cart_item.save()
-        return redirect('/cart')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
     else :
         product_variation = []
         if request.method == "POST":
@@ -121,7 +123,7 @@ def add_cart(request , product_id):
                 cart_item.variations.add(*product_variation)
             cart_item.save()
 
-        return redirect('/cart')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 def remove_cart(request , product_id,cart_item_id):
     
