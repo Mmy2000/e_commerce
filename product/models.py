@@ -21,6 +21,7 @@ class Product(models.Model):
     like = models.ManyToManyField(User , blank=True,related_name='product_favourite')
     created_at = models.DateTimeField( default=timezone.now)
     category = models.ManyToManyField('ProductCategory',related_name='product_category',verbose_name=('category'),  default="")
+    sub_category = models.CharField(blank=True,null=True, max_length=50)
     PRDBrand = models.ForeignKey('settings.Brand' ,related_name='product_brand', on_delete=models.CASCADE , blank=True, null=True ,verbose_name=_("Brand "))
     color = models.ForeignKey('Color',related_name='product_color',null=True,blank=True, on_delete=models.CASCADE)
     size = models.ForeignKey('Size',related_name='product_size',null=True,blank=True, on_delete=models.CASCADE)
