@@ -44,7 +44,7 @@
             <div class="col-lg-7 pb-5">
 
                 {% if single_product.offer %}
-                <div class="product-badge2 bg-success border-default text-body">{{single_product.offer}}%OFF</div>
+                <div class="product-badge2 bg-success border-default text-body">{{single_product.offer}}%OFF</div>&nbsp; &nbsp;
                 {% endif %}
                 {% if single_product.stock <= 0 %}
                 <div class="product-badge2 bg-secondary2 border-default text-body">Out of stock</div>
@@ -70,6 +70,7 @@
                 </div>{{orderproduct_count}} orders
                 <h3 class="font-weight-semi-bold mb-4">${{single_product.price}}</h3>
                 <p class="mb-4">{{single_product.description}}.</p>
+                {% if single_product.variation_set.colors %}
                 <h6>Choose Color:</h6>
 
                 <div class="d-flex mb-3">
@@ -80,6 +81,9 @@
                             {% endfor %}
                     </select>
                 </div>
+                {% else %}
+                {% endif %}
+                {% if single_product.variation_set.sizes %}
                 <h6>Choose Size:</h6>
 
                 <div class="d-flex mb-4">
@@ -90,6 +94,8 @@
                             {% endfor %}
                     </select>
                 </div>
+                {% else %}
+                {% endif %}
                 <div class="d-flex align-items-center mb-4 pt-2">
 
                     {% if user.is_authenticated %}
