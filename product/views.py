@@ -164,6 +164,9 @@ def product_detail(request,product_slug):
                 orderproduct = None
         else :
             orderproduct = None
+        
+        orderproduct_2 =  OrderProduct.objects.filter(  product_id=single_product.id)
+        orderproduct_count = orderproduct_2.count()
 
     except Exception as e:
         raise e
@@ -173,6 +176,7 @@ def product_detail(request,product_slug):
         'related':related,
         'reviews':reviews,
         'orderproduct':orderproduct,
+        'orderproduct_count':orderproduct_count,
     }
     return render(request,'product/product_detail.html',context)
 
