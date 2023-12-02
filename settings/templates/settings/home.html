@@ -140,7 +140,7 @@
                     {% if product.offer %}
                     <div class="product-badge2 bg-success border-default text-body">{{product.offer}}%OFF</div>
                     {% endif %}
-                    {% if product.stock == 0 %}
+                    {% if product.stock <= 0 %}
                     <div class="product-badge2 bg-secondary2 border-default text-body">Out of stock</div>
                     {% endif %}
                     <div class="d-flex justify-content-center">
@@ -256,7 +256,7 @@
                     {% if product.offer %}
                     <div class="product-badge2 bg-success border-default text-body">{{product.offer}}%OFF</div>
                     {% endif %}
-                    {% if product.stock == 0 %}
+                    {% if product.stock <= 0 %}
                     <div class="product-badge2 bg-secondary2 border-default text-body">Out of stock</div>
                     {% endif %}
                     <div class="d-flex justify-content-center">
