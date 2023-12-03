@@ -133,26 +133,7 @@ class ProductBysize(ListView):
         )
         return object_list
     
-'''
-class ProductDetail(FormMixin , DetailView):
-    model = Product
-    form_class = ProductReviewForm
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["related"] = Product.objects.filter(PRDBrand=self.get_object().PRDBrand)
-        return context
-    
-    def post(self , request , *args , **kwargs):
-        form = self.get_form()
-        if form.is_valid():
-            myform = form.save(commit=False)
-            myform.product= self.get_object()
-            myform.auther = request.user
-            myform.save()
-
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
-'''
 def product_detail(request,product_slug):
     try :
         single_product = Product.objects.get(slug=product_slug)
