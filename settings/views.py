@@ -13,7 +13,7 @@ from django.core.mail import send_mail
 
 # Create your views here.
 def home(request):
-    categories_home = ProductCategory.objects.filter().annotate(product_count=Count('product_category'))[:6] 
+    categories_home = ProductCategory.objects.filter(parent=None).annotate(product_count=Count('product_category'))[:6] 
     product = Product.objects.all()[:8]
     product_just_arrived = Product.objects.all().order_by('-created_at')[:8]
 

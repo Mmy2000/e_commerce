@@ -20,8 +20,7 @@ class Product(models.Model):
     description = models.TextField(max_length=10000)
     like = models.ManyToManyField(User , blank=True,related_name='product_favourite')
     created_at = models.DateTimeField( default=timezone.now)
-    category = models.ManyToManyField('ProductCategory',related_name='product_category',verbose_name=('category'),  default="")
-    sub_category = models.CharField(blank=True,null=True, max_length=50)
+    category = models.ForeignKey('ProductCategory',related_name='product_category',verbose_name=('category'), on_delete=models.CASCADE ,default='')
     PRDBrand = models.ForeignKey('settings.Brand' ,related_name='product_brand', on_delete=models.CASCADE , blank=True, null=True ,verbose_name=_("Brand "))
     slug = models.SlugField(null=True,blank=True , unique=True)
     tags = TaggableManager()
@@ -89,6 +88,7 @@ class ProductImages(models.Model):
     
 class ProductCategory(models.Model):
     name = models.CharField(max_length=60)
+    parent = models.ForeignKey('self', null=True, blank=True, related_name='children', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='categoryimages/')
 
     def __str__(self):

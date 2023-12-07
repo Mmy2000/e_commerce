@@ -84,14 +84,18 @@
                         id="navbar-vertical">
                         <div class="navbar-nav w-100 overflow-hidden" style="height: 300px">
                             <div class="nav-item dropdown">
-                                {% for category in categories_footer  %}
-                                <a href="{% url 'product:product_by_category' category %}"
-                                    class="nav-item nav-link">{{category}}</a>
-                                {% endfor %}
+                                {% for category in categories_home %}
+                                <a href="#" class="nav-link" data-toggle="dropdown">{{category.name}} <i
+                                        class="fa fa-angle-down float-right mt-1"></i></a>
+                                        {% if category.children.all %}
+                                        {% for subcategory in category.children.all %}
+                                <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
+                                    <a href="{% url 'product:product_by_category' subcategory %}" class="dropdown-item">{{subcategory.name}}</a>
+                                    {% endfor %}
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
                             </div>
-                            <a href="{% url 'settings:category_list'  %}"><button type="button"
-                                    class="btn btn-primary">Show
-                                    More</button></a>
                     </nav>
                 </div>
                 <div class="col-lg-9">
@@ -127,11 +131,11 @@
                                         <a href="{% url 'accounts:profile' %}" class="dropdown-item">Profile</a>
                                         <a href="{% url 'accounts:user_favourites' %}"
                                             class="dropdown-item">Favourit</a>
-                                            <a href="{% url 'accounts:orders' %}"
-                                            class="dropdown-item">Orders</a>
-                                            <a href="{% url 'password_change' %}" class="dropdown-item">Change Password</a>
-                                            <a href="{% url 'accounts:forgotPassword' %}" class="dropdown-item">Rest Password</a>
-                                            <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
+                                        <a href="{% url 'accounts:orders' %}" class="dropdown-item">Orders</a>
+                                        <a href="{% url 'password_change' %}" class="dropdown-item">Change Password</a>
+                                        <a href="{% url 'accounts:forgotPassword' %}" class="dropdown-item">Rest
+                                            Password</a>
+                                        <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
                                     </div>
                                 </div>
 
