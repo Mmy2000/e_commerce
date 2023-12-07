@@ -1,13 +1,10 @@
 from django.contrib import admin
-from . models import Product , ProductCategory , ProductImages ,  Color , Size  ,Variation,ReviewRating
+from . models import Product , ProductCategory , ProductImages , Variation,ReviewRating
 import admin_thumbnails
 
 # Register your models here.
 admin.site.register(ProductCategory)
 admin.site.register(ProductImages)
-
-admin.site.register(Color)
-admin.site.register(Size)
 
 @admin_thumbnails.thumbnail('image')
 class ProductGallaryInline(admin.TabularInline):

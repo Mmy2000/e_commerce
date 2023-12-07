@@ -23,8 +23,6 @@ class Product(models.Model):
     category = models.ManyToManyField('ProductCategory',related_name='product_category',verbose_name=('category'),  default="")
     sub_category = models.CharField(blank=True,null=True, max_length=50)
     PRDBrand = models.ForeignKey('settings.Brand' ,related_name='product_brand', on_delete=models.CASCADE , blank=True, null=True ,verbose_name=_("Brand "))
-    color = models.ForeignKey('Color',related_name='product_color',null=True,blank=True, on_delete=models.CASCADE)
-    size = models.ForeignKey('Size',related_name='product_size',null=True,blank=True, on_delete=models.CASCADE)
     slug = models.SlugField(null=True,blank=True , unique=True)
     tags = TaggableManager()
 
@@ -95,19 +93,6 @@ class ProductCategory(models.Model):
 
     def __str__(self):
         return self.name
-    
-
-class Color(models.Model):
-    name = models.CharField(max_length=50 )
-
-    def __str__(self):
-        return str(self.name)
-    
-class Size(models.Model):
-    name = models.CharField(max_length=50 )
-
-    def __str__(self):
-        return str(self.name)
     
 
 class ReviewRating(models.Model):

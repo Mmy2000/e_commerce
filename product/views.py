@@ -1,10 +1,9 @@
 from django.shortcuts import render , get_object_or_404 , redirect
 from django.views.generic import ListView , DetailView
 from .models import Product , ReviewRating
-from .models import  ProductCategory , Color, Size 
+from .models import  ProductCategory 
 from django.db.models import Count
 from django_filters.views import FilterView
-from . filters import ProductFilter
 from django.db.models.query_utils import Q
 from django.http import HttpResponseRedirect
 from accounts.models import Profile
@@ -33,8 +32,6 @@ class ProductList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["categories"] = ProductCategory.objects.all().annotate(product_count=Count('product_category'))
-        context["sizes"] = Size.objects.all().annotate(product_count=Count('product_size'))
-        context["colors"] = Color.objects.all().annotate(product_count=Count('product_color'))
 
         return context
     
@@ -108,30 +105,6 @@ class ProductByTags(ListView):
         )
         return object_list
 
-class ProductByColor(ListView):
-    model = Product
-    paginate_by = 12
-    template_name = 'product/home_search.html'
-
-
-    def get_queryset(self) :
-        slug = self.kwargs['slug']
-        object_list = Product.objects.filter(
-            Q(color__name__icontains = slug)
-        )
-        return object_list
-class ProductBysize(ListView):
-    model = Product
-    paginate_by = 12
-    template_name = 'product/home_search.html'
-
-
-    def get_queryset(self) :
-        slug = self.kwargs['slug']
-        object_list = Product.objects.filter(
-            Q(size__name__icontains = slug)
-        )
-        return object_list
     
 def product_by_price(request):
     products = Product.objects.all()
