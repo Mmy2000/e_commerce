@@ -150,7 +150,7 @@
                 {% for tag in single_product.tags.all %}
                 <a href="{% url 'product:product_by_tags' tag%}" class="tag-cloud-link">{{tag}}</a>&nbsp; &nbsp;
                 {% endfor %}
-            </div>
+            </div><br><br>
             {% else %}
             {% endif %}
             <h3>Customer Reviews </h3>
