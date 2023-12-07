@@ -133,6 +133,22 @@ class ProductBysize(ListView):
         )
         return object_list
     
+def product_by_price(request):
+    products = Product.objects.all()
+    categories = ProductCategory.objects.all().annotate(product_count=Count('product_category'))
+
+    min_price = request.GET.get('min_price')
+    max_price = request.GET.get('max_price')
+
+    if min_price:
+            products = products.filter(price__gte=min_price)
+
+    if max_price:
+            products = products.filter(price__lte=max_price)
+    context = {'products':products,
+               'categories':categories}
+
+    return render(request,'product/product_by_price.html',context)
 
 def product_detail(request,product_slug):
     try :
@@ -185,3 +201,4 @@ def submit_review(request,product_id):
                 data.save()
                 messages.success(request,'Thank You , Your Review has been submitted.')
                 return redirect(url)
+            
