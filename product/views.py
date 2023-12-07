@@ -158,7 +158,7 @@ def product_by_variation(request):
         products = products.filter(variation__variation_value__icontains=variation_name)
     context = {'products':products,
                'categories':categories}
-    return render(request , 'product/product_by_price',context)
+    return render(request , 'product/product_by_price.html',context)
 
 def product_detail(request,product_slug):
     try :

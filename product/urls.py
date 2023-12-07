@@ -15,4 +15,5 @@ urlpatterns = [
     path('size/<str:slug>/' , views.ProductBysize.as_view() , name='product_by_size'),
     path('submit_review/<int:product_id>/',views.submit_review ,name='submit_review'),
     path('/product_by_price/' , views.product_by_price , name = 'product_by_price'),
+    path('/product_by_variation/' , views.product_by_variation , name = 'product_by_variation'),
 ]
