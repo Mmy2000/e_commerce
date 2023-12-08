@@ -8,7 +8,36 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
 
+        h1 {
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        ul ul {
+            margin-top: 5px;
+            margin-left: 20px;
+        }
+    </style>
     <!-- Favicon -->
     <link href="{% static 'img4/favicon.ico'%}" rel="icon">
 
@@ -80,22 +109,26 @@
                         <h6 class="m-0">Categories</h6>
                         <i class="fa fa-angle-down text-dark"></i>
                     </a>
-                    <nav class="collapse {% if forloop.first %} show {% endif %} navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0"
+                    <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0"
                         id="navbar-vertical">
-                        <div class="navbar-nav w-100 overflow-hidden" style="height: 300px">
+                        <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
                             <div class="nav-item dropdown">
-                                {% for category in categories_footer %}
-                                <a href="#" class="nav-link" data-toggle="dropdown">{{category.name}} <i
-                                        class="fa fa-angle-down float-right mt-1"></i></a>
+                                <ul>
+                                    {% for category in categories_footer %}
+                                    <li class="dropdown">{{ category.name }}
                                         {% if category.children.all %}
-                                        {% for subcategory in category.children.all %}
-                                <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                    <a href="{% url 'product:product_by_category' subcategory %}" class="dropdown-item">{{subcategory.name}}</a>
+                                        <ul>
+                                            {% for subcategory in category.children.all %}
+                                            <a href="{% url 'product:product_by_category' subcategory %}" style="text-decoration: none;"><li>{{ subcategory.name }}</li><a/>
+                                            {% endfor %}
+                                        </ul>
+                                        {% endif %}
+                                    </li>
                                     {% endfor %}
-                                    {% endif %}
-                                    {% endfor %}
-                                </div>
+                                </ul>
                             </div>
+
+                        </div>
                     </nav>
                 </div>
                 <div class="col-lg-9">
