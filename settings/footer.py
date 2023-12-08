@@ -10,8 +10,8 @@ from django.http import JsonResponse
 
 def myfooter(request):
     myfooter = Info.objects.last()
-    categories_footer = ProductCategory.objects.all().annotate(product_count=Count('product_category'))
-    subcategories = Subcategory.objects.all().annotate(products_count=Count('product_subcategory'))
+    categories_footer = ProductCategory.objects.all()
+    subcategories = Subcategory.objects.annotate(product_count=Count('product'))    
     brands_footer = Brand.objects.all().annotate(product_count=Count('product_brand'))[:6]
     context ={
         'myfooter':myfooter,

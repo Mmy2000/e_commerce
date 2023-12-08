@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.shortcuts import render
 from django.views.generic import ListView , DetailView
-from product.models import ProductCategory , Product 
+from product.models import ProductCategory , Product ,Subcategory
 from django.shortcuts import render
 from django.db.models.query_utils import Q
 from django.db.models import Count
@@ -13,7 +13,8 @@ from django.core.mail import send_mail
 
 # Create your views here.
 def home(request):
-    categories_home = ProductCategory.objects.filter().annotate(product_count=Count('product_category'))[:6] 
+    categories_home = ProductCategory.objects.filter()[:6] 
+    subcategories = Subcategory.objects.annotate(product_count=Count('product')) 
     product = Product.objects.all()[:8]
     product_just_arrived = Product.objects.all().order_by('-created_at')[:8]
 
@@ -21,6 +22,7 @@ def home(request):
         'categories_home':categories_home,
         'product':product ,
         'product_just_arrived':product_just_arrived,
+        'subcategories':subcategories
     })
 
 
