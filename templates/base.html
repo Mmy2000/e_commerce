@@ -267,9 +267,9 @@
                             <h5 class="font-weight-bold text-dark mb-4">Categories</h5>
                             <div class="d-flex flex-column justify-content-start">
                                 {% for category in categories_footer %}
-                                {% for subcategory in category.children.all %}
-                                <a class="text-dark mb-2" href="{% url 'product:product_by_category' subcategory %}"><i
-                                        class="fa fa-angle-right mr-2"></i>{{subcategory}}</a>
+                                {% for subcategory in category.subcategory_set.all %}
+                                <a class="text-dark mb-2" href="{% url 'product:product_by_category' subcategory.id %}"><i
+                                        class="fa fa-angle-right mr-2"></i>{{subcategory}}({{category}})</a>
                                 {% endfor %}
                                 {% endfor %}
                                 <a href="{% url 'settings:category_list'  %}"><button type="button"

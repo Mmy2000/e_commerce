@@ -89,7 +89,7 @@ class ProductImages(models.Model):
     
 class ProductCategory(models.Model):
     name = models.CharField(max_length=60)
-    image = models.ImageField(upload_to='categoryimages/')
+    
 
     def __str__(self):
         return self.name
@@ -97,6 +97,7 @@ class ProductCategory(models.Model):
 class Subcategory(models.Model):
     category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='subcategoryimages/',blank=True)
 
     def __str__(self):
         return self.name
