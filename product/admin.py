@@ -3,8 +3,13 @@ from . models import Product , ProductCategory , ProductImages , Variation,Revie
 import admin_thumbnails
 
 # Register your models here.
+class SubCategoryAdmin(admin.ModelAdmin):
+    list_display = ('name','category')
+
+
+
 admin.site.register(ProductCategory)
-admin.site.register(Subcategory)
+admin.site.register(Subcategory,SubCategoryAdmin)
 admin.site.register(ProductImages)
 
 @admin_thumbnails.thumbnail('image')
