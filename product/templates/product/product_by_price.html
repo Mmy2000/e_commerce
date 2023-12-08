@@ -87,17 +87,6 @@
                 </form>
             </div>
             <!-- Size End -->
-            <div class="border-bottom mb-4 pb-4">
-                <h5 class="font-weight-semi-bold mb-4">Filter by category</h5>
-                {% for category in categories %}
-                <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                    <input class="custom-control-input" checked id="{{category}}">
-                    <label>{{category}}</label>
-                    <a href="{% url 'product:product_by_category' category %}"><span
-                            class="badge border font-weight-normal">{{category.product_count}}</span></a>
-                </div>
-                {% endfor %}
-            </div>
         </div>
         <!-- Shop Sidebar End -->
 
