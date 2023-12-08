@@ -75,15 +75,21 @@
 
             <!-- Size Start -->
             <div class="mb-5">
-                <form method="GET" action="{% url 'product:product_by_price'%}">
-                    <h5 class="font-weight-semi-bold mb-4">Filter by price</h5>
-                    <label for="min_price">Min Price:</label>
-                    <input class="form-control" type="text" name="min_price" value="{{ request.GET.min_price }}">
-
-                    <label for="max_price">Max Price:</label>
-                    <input class="form-control" type="text" name="max_price" value="{{ request.GET.max_price }}"><br>
-
-                    <button class="btn btn-primary col-12 mx-auto" type="submit">Filter</button>
+                <h5 class="font-weight-semi-bold mb-4">Filter by Price</h5>
+                <form action="{% url 'product:product_by_price' %}" method="GET">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="min_price">Min Price:</label>
+                            <input class="mr-2 form-control" type="text" name="min_price"
+                                value="{{ request.GET.min_price }}">
+                        </div>
+                        <div class="form-group text-right col-md-6">
+                            <label for="max_price">Max Price:</label>
+                            <input class="mr-2 form-control" type="text" name="max_price"
+                                value="{{ request.GET.max_price }}">
+                        </div>
+                    </div>
+                    <button class="btn btn-block btn-primary">Apply</button>
                 </form>
             </div>
             <!-- Size End -->
