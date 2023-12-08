@@ -116,10 +116,10 @@
                                 <ul>
                                     {% for category in categories_footer %}
                                     <li class="dropdown">{{ category.name }}
-                                        {% if category.children.all %}
+                                        {% if category.subcategory_set.all %}
                                         <ul>
-                                            {% for subcategory in category.children.all %}
-                                            <a href="{% url 'product:product_by_category' subcategory %}" style="text-decoration: none;"><li>{{ subcategory.name }}</li><a/>
+                                            {% for subcategory in category.subcategory_set.all %}
+                                            <a href="{% url 'product:product_by_category' subcategory.id %}" style="text-decoration: none;"><li>{{ subcategory.name }}</li><a/>
                                             {% endfor %}
                                         </ul>
                                         {% endif %}

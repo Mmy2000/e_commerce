@@ -31,7 +31,7 @@ class ProductList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["categories"] = ProductCategory.objects.all().annotate(product_count=Count('product_category')).filter(parent=None)
+        context["categories"] = ProductCategory.objects.all().annotate(product_count=Count('product_category'))
 
         return context
     
@@ -73,9 +73,9 @@ class ProductByCategory(ListView):
 
 
     def get_queryset(self) :
-        slug = self.kwargs['slug']
+        id = self.kwargs['id']
         object_list = Product.objects.filter(
-            Q(category__name__icontains = slug)
+            Q(subcategory__id__icontains = id)
         )
         return object_list
     

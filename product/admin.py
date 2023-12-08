@@ -1,9 +1,10 @@
 from django.contrib import admin
-from . models import Product , ProductCategory , ProductImages , Variation,ReviewRating
+from . models import Product , ProductCategory , ProductImages , Variation,ReviewRating , Subcategory
 import admin_thumbnails
 
 # Register your models here.
 admin.site.register(ProductCategory)
+admin.site.register(Subcategory)
 admin.site.register(ProductImages)
 
 @admin_thumbnails.thumbnail('image')
