@@ -125,12 +125,10 @@ def product_by_price(request):
 
 def product_by_variation(request):
     products = Product.objects.all()
-    categories = ProductCategory.objects.all().annotate(product_count=Count('product_category'))
     variation_name = request.GET.get('variation_name')
     if variation_name:
         products = products.filter(variation__variation_value__icontains=variation_name)
-    context = {'products':products,
-               'categories':categories}
+    context = {'products':products}
     return render(request , 'product/product_by_price.html',context)
 
 def product_detail(request,product_slug):
