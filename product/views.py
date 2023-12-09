@@ -61,6 +61,11 @@ def product_list_orderd_by_rating(request):
     context = {'object_list': object_list}
     return render(request, 'product/product_list.html', context)
 
+def product_list_orderd_by_created(request):
+    object_list = Product.objects.all().order_by('-created_at')
+    context = {'object_list':object_list}
+    return render(request , 'product/product_list.html' , context)
+
 class Search(ListView):
     model = Product
     paginate_by = 12

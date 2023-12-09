@@ -27,6 +27,9 @@ class Product(models.Model):
     tags = TaggableManager()
     is_available = models.BooleanField(default=True)
 
+    class Meta:
+        ordering = ["name"]
+
     def save(self,*args, **kwargs):
         if not self.slug:
             self.slug=slugify(self.name)
