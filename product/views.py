@@ -17,6 +17,8 @@ from django.contrib import messages
 from .forms import ReviewForm
 from orders.models import OrderProduct
 from django_filters.views import FilterView
+from django.db.models import Avg
+
 
 
 
@@ -53,6 +55,11 @@ def like_or_unlike(request,id):
         product.like.add(request.user.id)
     
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+def product_list_orderd_by_rating(request):
+    object_list = Product.objects.all().order_by('-reviewrating')
+    context = {'object_list': object_list}
+    return render(request, 'product/product_list.html', context)
 
 class Search(ListView):
     model = Product
