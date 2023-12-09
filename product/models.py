@@ -25,6 +25,7 @@ class Product(models.Model):
     PRDBrand = models.ForeignKey('settings.Brand' ,related_name='product_brand', on_delete=models.CASCADE , blank=True, null=True ,verbose_name=_("Brand "))
     slug = models.SlugField(null=True,blank=True , unique=True)
     tags = TaggableManager()
+    is_available = models.BooleanField(default=True)
 
     def save(self,*args, **kwargs):
         if not self.slug:
@@ -56,6 +57,13 @@ class Product(models.Model):
         if reviews['count'] is not None:
             count = int(reviews['count'])
         return count
+    
+    def product_count(self):
+        products = Product.objects.all().filter(is_available=True)
+        product_count = products.count()
+        print(product_count)
+        return product_count
+    
     
 class VariationManager(models.Manager):
     def colors(self):

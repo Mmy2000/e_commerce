@@ -18,7 +18,7 @@ class ProductGallaryInline(admin.TabularInline):
     extra = 1
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name' , 'price' ,'category' , 'subcategory' , 'stock' , 'created_at' )
+    list_display = ('name' , 'price' ,'category' , 'subcategory' , 'stock' , 'created_at' , 'is_available')
     inlines = [ProductGallaryInline]
 
 admin.site.register(Product,ProductAdmin)
