@@ -70,6 +70,16 @@ def product_list_orderd_by_papularty(request):
     context = {'object_list':object_list}
     return render(request , 'product/product_list.html' , context)
 
+def product_list_orderd_by_price(request):
+    object_list = Product.objects.all().order_by('price')
+    context = {'object_list':object_list}
+    return render(request , 'product/product_list.html' , context)
+
+def product_list_orderd_by_price2(request):
+    object_list = Product.objects.all().order_by('-price')
+    context = {'object_list':object_list}
+    return render(request , 'product/product_list.html' , context)
+
 class Search(ListView):
     model = Product
     paginate_by = 12

@@ -5,9 +5,11 @@ app_name = 'product'
 
 urlpatterns = [
     path('',views.ProductList.as_view(),name='product_list'),
-    path('orderd_by_rating',views.product_list_orderd_by_rating,name='product_list_orderd_by_rating'),
-    path('product_list_orderd_by_created',views.product_list_orderd_by_created , name='product_list_orderd_by_created'),
-    path('product_list_orderd_by_papularty',views.product_list_orderd_by_papularty , name='product_list_orderd_by_papularty'),
+    path('orderd_by_rating/',views.product_list_orderd_by_rating,name='product_list_orderd_by_rating'),
+    path('orderd_by_created/',views.product_list_orderd_by_created , name='product_list_orderd_by_created'),
+    path('orderd_by_popularty/',views.product_list_orderd_by_papularty , name='product_list_orderd_by_papularty'),
+    path('orderd_by_price/',views.product_list_orderd_by_price , name='product_list_orderd_by_price'),
+    path('orderd_by_highest price/',views.product_list_orderd_by_price2 , name='product_list_orderd_by_price2'),
     path('search/' , views.Search.as_view() , name = 'search'),
     path('<slug:product_slug>/',views.product_detail ,name='product_detail'),
     path('<int:id>/like_or_dislike',views.like_or_unlike , name='like'),
