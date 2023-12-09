@@ -26,7 +26,7 @@
                 <form method="GET" action="{% url 'product:product_by_variation'%}">
                     <h5 class="font-weight-semi-bold mb-4">Filter by Variations</h5>
                     <label for="variation_name">Variation Name:</label>
-                    <input class="form-control" type="text" name="variation_name"
+                    <input placeholder="Color or Size" class="form-control" type="text" name="variation_name"
                         value="{{ request.GET.variation_name }}"><br>
 
                     <button class="btn btn-primary col-12 mx-auto" type="submit">Filter</button>
