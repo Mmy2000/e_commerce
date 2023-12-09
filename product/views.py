@@ -65,6 +65,10 @@ def product_list_orderd_by_created(request):
     object_list = Product.objects.all().order_by('-created_at')
     context = {'object_list':object_list}
     return render(request , 'product/product_list.html' , context)
+def product_list_orderd_by_papularty(request):
+    object_list = Product.objects.all().order_by('-views')
+    context = {'object_list':object_list}
+    return render(request , 'product/product_list.html' , context)
 
 class Search(ListView):
     model = Product
@@ -149,6 +153,8 @@ def product_detail(request,product_slug):
         in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(request),product=single_product).exists()
         related = Product.objects.filter(PRDBrand=single_product.PRDBrand)
         reviews = ReviewRating.objects.filter(product_id=single_product.id , status=True)
+        single_product.views+=1
+        single_product.save()
         if request.user.is_authenticated:
             try:
                 orderproduct = OrderProduct.objects.filter(user=request.user , product_id=single_product.id).exists()

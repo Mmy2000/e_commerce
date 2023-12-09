@@ -25,6 +25,7 @@ class Product(models.Model):
     PRDBrand = models.ForeignKey('settings.Brand' ,related_name='product_brand', on_delete=models.CASCADE , blank=True, null=True ,verbose_name=_("Brand "))
     slug = models.SlugField(null=True,blank=True , unique=True)
     tags = TaggableManager()
+    views = models.PositiveIntegerField(default=0)
     is_available = models.BooleanField(default=True)
 
     class Meta:
