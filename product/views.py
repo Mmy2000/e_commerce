@@ -18,7 +18,7 @@ from .forms import ReviewForm
 from orders.models import OrderProduct
 from django_filters.views import FilterView
 from django.db.models import Avg
-
+from django.core.paginator import Paginator
 
 
 
@@ -58,7 +58,11 @@ def like_or_unlike(request,id):
 
 def product_list_orderd_by_rating(request):
     object_list = Product.objects.all().order_by('-reviewrating')
-    context = {'object_list': object_list}
+    paginator = Paginator(object_list, 9)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {'object_list': object_list,
+               'page_obj':page_obj}
     return render(request, 'product/product_list.html', context)
 
 def product_list_orderd_by_created(request):
