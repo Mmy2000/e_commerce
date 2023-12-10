@@ -67,21 +67,37 @@ def product_list_orderd_by_rating(request):
 
 def product_list_orderd_by_created(request):
     object_list = Product.objects.all().order_by('-created_at')
-    context = {'object_list':object_list}
+    paginator = Paginator(object_list, 9)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {'object_list': object_list,
+               'page_obj':page_obj}
     return render(request , 'product/product_list.html' , context)
 def product_list_orderd_by_papularty(request):
     object_list = Product.objects.all().order_by('-views')
-    context = {'object_list':object_list}
+    paginator = Paginator(object_list, 9)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {'object_list': object_list,
+               'page_obj':page_obj}
     return render(request , 'product/product_list.html' , context)
 
 def product_list_orderd_by_price(request):
     object_list = Product.objects.all().order_by('price')
-    context = {'object_list':object_list}
+    paginator = Paginator(object_list, 9)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {'object_list': object_list,
+               'page_obj':page_obj}
     return render(request , 'product/product_list.html' , context)
 
 def product_list_orderd_by_price2(request):
     object_list = Product.objects.all().order_by('-price')
-    context = {'object_list':object_list}
+    paginator = Paginator(object_list, 9)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {'object_list': object_list,
+               'page_obj':page_obj}
     return render(request , 'product/product_list.html' , context)
 
 class Search(ListView):
