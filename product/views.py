@@ -181,7 +181,6 @@ def product_detail(request,product_slug):
     try :
         single_product = Product.objects.get(slug=product_slug)
         in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(request),product=single_product).exists()
-        related = Product.objects.filter(PRDBrand=single_product.PRDBrand)
         reviews = ReviewRating.objects.filter(product_id=single_product.id , status=True)
         single_product.views+=1
         single_product.save()
@@ -198,6 +197,8 @@ def product_detail(request,product_slug):
 
     except Exception as e:
         raise e
+    related = Product.objects.filter(subcategory=single_product.subcategory)[:3]
+
     context = {
         'single_product':single_product,
         'in_cart':in_cart,
