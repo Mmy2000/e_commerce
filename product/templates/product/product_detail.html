@@ -389,8 +389,10 @@
     }
 
     function decrement() {
-      counterValue--;
-      document.getElementById('counter').value = counterValue;
+      if (counterValue > 1) {
+        counterValue--;
+        document.getElementById('counter').value = counterValue;
+      }
     }
   </script>
 
