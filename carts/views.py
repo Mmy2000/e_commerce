@@ -48,11 +48,8 @@ def add_cart(request , product_id):
             if product_variation in ex_var_list:
                 index=ex_var_list.index(product_variation)
                 item_id=id[index]
-                item = CartItem.objects.get(product=product , id=item_id)
-                if request.POST['quantity']:
-                    item.quantity += int(request.POST['quantity'])
-                else:   
-                    item.quantity+=1
+                item = CartItem.objects.get(product=product , id=item_id)  
+                item.quantity+=1
                 item.save()
             else :
                 item = CartItem.objects.create(product=product , quantity = request.POST['quantity'] , user=current_user)
