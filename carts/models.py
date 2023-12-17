@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator , MinValueValidator
+from django.utils import timezone
 
 # Create your models here.
 class Cart(models.Model):
@@ -30,10 +32,10 @@ class CartItem(models.Model):
     
 class Coupon(models.Model):
     code = models.CharField(max_length=50, unique=True)
-    discount = models.IntegerField()
-    expiration_date = models.DateField()
-    user = models.ManyToManyField(User, related_name='coupons' , null=True , blank=True)
-    max_number = models.IntegerField(default=0)
+    valid_from = models.DateTimeField( default=timezone.now)
+    valid_to =  models.DateTimeField( default=timezone.now)
+    discount = models.IntegerField(validators=[MinValueValidator(0),MaxValueValidator(100)])
+    active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.code
