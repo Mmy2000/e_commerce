@@ -264,21 +264,15 @@
                 <div class="col-lg-8 col-md-12">
                     <div class="row">
                         <div class="col-md-4 mb-5">
-                            <h5 class="font-weight-bold text-dark mb-4">Categories</h5>
+                            <h5 class="font-weight-bold text-dark mb-4">Pages</h5>
                             <div class="d-flex flex-column justify-content-start">
-                                {% for category in categories_footer %}
-                                {% for subcategory in category.subcategory_set.all %}
-                                <a class="text-dark mb-2" href="{% url 'product:product_by_category' subcategory.id %}"><i
-                                        class="fa fa-angle-right mr-2"></i>{{subcategory}}({{category}})</a>
-                                {% endfor %}
-                                {% endfor %}
-                                <a href="{% url 'settings:category_list'  %}"><button type="button"
-                                        class="btn btn-primary">Show
-                                        More</button></a>
+                                <a class="text-dark mb-2" href="/"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                            <a class="text-dark mb-2" href="{% url 'product:product_list' %}"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                            <a class="text-dark" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                             </div>
                         </div>
                         <div class="col-md-4 mb-5">
-                            <h5 class="font-weight-bold text-dark mb-4">Brand</h5>
+                            <h5 class="font-weight-bold text-dark mb-4">Brands</h5>
                             <div class="d-flex flex-column justify-content-start">
                                 {% for brand in brands_footer  %}
                                 <a class="text-dark mb-2" href="{%url 'product:product_by_brand' brand%}"><i
