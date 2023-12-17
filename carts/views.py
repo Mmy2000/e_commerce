@@ -197,7 +197,7 @@ def apply_coupon(request):
         code = request.POST.get('code')
         if code:
             try:
-                coupon = Coupon.objects.get(code=code, expiration_date__gte=timezone.now())
+                coupon = Coupon.objects.get(code=code, expiration_date__gte=timezone.now() , user=request.user)
                 request.session['coupon_id'] = coupon.id
             except Coupon.DoesNotExist:
                 # Handle invalid coupon code

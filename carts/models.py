@@ -32,6 +32,8 @@ class Coupon(models.Model):
     code = models.CharField(max_length=50, unique=True)
     discount = models.IntegerField()
     expiration_date = models.DateField()
+    user = models.ManyToManyField(User, related_name='coupons' , null=True , blank=True)
+    max_number = models.IntegerField(default=0)
 
     def __str__(self):
         return self.code
