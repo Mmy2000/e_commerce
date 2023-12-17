@@ -8,7 +8,6 @@ import json
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.http import HttpResponse, JsonResponse
-from carts.models import Coupon
 from django.utils import timezone
 from django.urls import reverse
 

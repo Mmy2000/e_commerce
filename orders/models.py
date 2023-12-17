@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from carts.models import Coupon
 
 # Create your models here.
 

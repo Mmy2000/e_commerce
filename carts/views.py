@@ -7,7 +7,6 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.crypto import get_random_string
 from django.http import HttpResponseRedirect
-from .models import Coupon
 from django.utils import timezone
 from django.urls import reverse
 
@@ -192,21 +191,10 @@ def cart(request,total=0 ,quantity=0,cart_items=None ):
     }
     return render(request,'carts/cart.html',context)
 
-def apply_coupon(request):
-    if request.method == 'POST':
-        code = request.POST.get('code')
-        if code:
-            try:
-                coupon = Coupon.objects.get(code=code, valid_from__lte=timezone.now(), valid_to__gte=timezone.now(), active=True)
-                request.session['coupon_id'] = coupon.id
-            except Coupon.DoesNotExist:
-                # Handle invalid coupon code
-                pass
-    return redirect(reverse('carts:checkout'))
+
 
 @login_required(login_url='login')
 def checkout(request,total=0 ,quantity=0,cart_items=None):
-    coupon_id = request.session.get('coupon_id')
     try:
         tax = 0
         grand_total=0
@@ -225,15 +213,6 @@ def checkout(request,total=0 ,quantity=0,cart_items=None):
                 quantity+=cart_item.quantity
         tax = (2 * total)/100
         grand_total = total+tax
-        if coupon_id is not None:  # Check if coupon_id is set
-            try:
-                coupon = Coupon.objects.get(id=coupon_id,  valid_from__lte=timezone.now(), valid_to__gte=timezone.now(), active=True)
-                grand_total -= coupon.discount 
-                request.session.pop('coupon_id', None)  # Safely remove the key
-            except Coupon.DoesNotExist:
-            # Handle coupon not found or expired
-                pass
-            grand_total=round(grand_total,2)
     except Cart.DoesNotExist:
         pass
     context={

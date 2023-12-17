@@ -30,12 +30,4 @@ class CartItem(models.Model):
     def __str__(self):
         return str(self.product)
     
-class Coupon(models.Model):
-    code = models.CharField(max_length=50, unique=True)
-    valid_from = models.DateTimeField( default=timezone.now)
-    valid_to =  models.DateTimeField( default=timezone.now)
-    discount = models.IntegerField(validators=[MinValueValidator(0),MaxValueValidator(100)])
-    active = models.BooleanField(default=True)
 
-    def __str__(self):
-        return self.code
