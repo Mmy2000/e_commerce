@@ -44,10 +44,12 @@
                                 {{item.variation_value|capfirst}}<br>
                                 {% endfor %}
                                 {% endif %}
+                                {{cart_item.product.stock}} In Stock
                             </p>
                         </td>
                         {% if cart_item.product.discount %}
-                        <td class="align-middle">${{cart_item.product.discount}}</td>
+                        <td class="align-middle">${{cart_item.product.discount}}<br><h6 class="text-muted ml-2"><del>${{cart_item.product.price}}</del></h6></td>
+                        
                         {% else %}
                         <td class="align-middle">${{cart_item.product.price}}</td>
                         {% endif %}
@@ -61,6 +63,7 @@
                                 </div>
                                 <input type="text" class="form-control form-control-sm bg-secondary text-center"
                                     value="{{cart_item.quantity}}">
+                                {% if cart_item.quantity < cart_item.product.stock %}
                                 <div class="input-group-btn">
                                     <form action="{% url 'carts:add_cart' cart_item.product.id %}" method="POST">
                                         {% csrf_token %}
@@ -73,6 +76,8 @@
                                                 class="fa fa-plus"></i> </button>
                                     </form>
                                 </div>
+                                {% else %}
+                                {% endif %}
                             </div>
                         </td>
                         <td class="align-middle">${{cart_item.sub_total}}</td>
