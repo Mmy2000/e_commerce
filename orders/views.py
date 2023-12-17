@@ -8,11 +8,14 @@ import json
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.http import HttpResponse, JsonResponse
+from carts.models import Coupon
+from django.utils import timezone
 from django.urls import reverse
 
 
-
 # Create your views here.
+
+
 def place_order(request, total=0, quantity=0,):
     current_user = request.user
     # If the cart count is less than or equal to 0, then redirect back to shop
@@ -32,7 +35,6 @@ def place_order(request, total=0, quantity=0,):
                 quantity+=cart_item.quantity
     tax = (2 * total)/100
     grand_total = total + tax
-
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
@@ -74,7 +76,7 @@ def place_order(request, total=0, quantity=0,):
             }
             return render(request, 'payment.html', context)
     else:
-        return redirect('checkout')
+        return redirect(reverse('carts:checkout'))
     
 def payments(request):
     body = json.loads(request.body)
