@@ -156,17 +156,25 @@ class ProductByTags(ListView):
     
 def product_by_price(request):
     products = Product.objects.all()
-    categories = ProductCategory.objects.all().annotate(product_count=Count('product_category'))
+    categories = ProductCategory.objects.all().annotate(product_count=Count('product'))
 
     min_price = request.GET.get('min_price')
     max_price = request.GET.get('max_price')
+    for product in products:
+        if product.discount:
+            if min_price:
+                product = products.filter(discount__gte=min_price)
 
-    if min_price:
-            products = products.filter(price__gte=min_price)
+            if max_price:
+                product = products.filter(discount__lte=max_price)
+        else:
+            if min_price:
+                product = products.filter(price__gte=min_price)
 
-    if max_price:
-            products = products.filter(price__lte=max_price)
-    context = {'products':products,
+            if max_price:
+                product = products.filter(price__lte=max_price)
+            
+    context = {'products':product,
                'categories':categories}
 
     return render(request,'product/product_by_price.html',context)
