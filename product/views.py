@@ -19,16 +19,18 @@ from orders.models import OrderProduct
 from django_filters.views import FilterView
 from django.db.models import Avg
 from django.core.paginator import Paginator
-
+from .filters import ProductFilter
 
 
 
 
 # Create your views here.
 
-class ProductList(ListView):
+class ProductList(FilterView):
     model = Product
+    filterset_class = ProductFilter
     paginate_by = 9
+    template_name = 'product/product_list.html'
 
 
     def get_context_data(self, **kwargs):

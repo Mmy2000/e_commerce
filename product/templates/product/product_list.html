@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load django_bootstrap5 %}
 {% block body %}
 
 <!-- Page Header Start -->
@@ -53,6 +54,17 @@
                     <button class="btn btn-block btn-primary">Apply</button>
                 </form>
             </div>
+            <div class="border-bottom mb-4 pb-4">
+                    <h5 class="font-weight-semi-bold mb-4">Filter by Category</h5>
+                    <form >
+                        <div class="form-control">
+                        {% csrf_token %}
+                        {% bootstrap_form filter.form %}
+                        {% bootstrap_button button_type="submit" content="filter" %}
+                        </div>
+                    </form>
+                </div>
+            
         </div>
         <!-- Shop Sidebar End -->
 
