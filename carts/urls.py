@@ -1,5 +1,5 @@
 from django.urls import path
-from . views import cart ,add_cart,remove_cart,remove_cart_item,checkout
+from . views import cart ,add_cart,remove_cart,remove_cart_item,checkout,apply_coupon
 
 app_name = 'carts'
 
@@ -9,4 +9,5 @@ urlpatterns = [
     path('remove_cart/<int:product_id>/<int:cart_item_id>/', remove_cart ,name = 'remove_cart'),
     path('remove_cart_item/<int:product_id>/<int:cart_item_id>/', remove_cart_item ,name = 'remove_cart_item'),
     path('checkout/', checkout ,name = 'checkout'),
+    path('apply-coupon/', apply_coupon, name='apply_coupon'),
 ]

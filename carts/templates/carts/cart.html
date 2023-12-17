@@ -86,9 +86,10 @@
             </table>
         </div>
         <div class="col-lg-4">
-            <form class="mb-5" action="">
+            <form class="mb-5" action="{% url 'carts:apply_coupon'%}" method="POST">
+                {% csrf_token %}
                 <div class="input-group">
-                    <input type="text" class="form-control p-4" placeholder="Coupon Code">
+                    <input type="text" class="form-control p-4" name="code" placeholder="Coupon Code">
                     <div class="input-group-append">
                         <button class="btn btn-primary">Apply Coupon</button>
                     </div>
