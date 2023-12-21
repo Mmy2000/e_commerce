@@ -14,13 +14,12 @@ def myfooter(request):
     categories_footer = ProductCategory.objects.all()
     subcategories = Subcategory.objects.annotate(product_count=Count('product'))    
     brands_footer = Brand.objects.all().annotate(product_count=Count('product_brand'))[:6]
-    profile=Profile.objects.get(user=request.user)
+    #profile=Profile.objects.get(user=request.user.id)
     context ={
         'myfooter':myfooter,
         'categories_footer':categories_footer,
         'brands_footer':brands_footer,
         'subcategories':subcategories,
-        'profile':profile
         }
     return(context)
 

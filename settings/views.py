@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from django.views.generic import ListView , DetailView
 from product.models import ProductCategory , Product ,Subcategory
 from django.shortcuts import render
@@ -9,6 +9,9 @@ from .models import  NewsLitter , Brand , Info
 from django.http import JsonResponse
 from . forms import ContactForm
 from django.core.mail import send_mail
+from django.contrib import messages
+from django.urls import reverse
+
 
 
 # Create your views here.
@@ -52,7 +55,8 @@ def contact(request):
             email = form.cleaned_data['email']
             recipient_list =email
             send_mail(subject, message, email_from, [recipient_list])
-            return render(request, 'success.html') 
+            messages.success(request, 'Your message has been send')
+            return redirect(reverse('settings:contact'))
     form = ContactForm()
     context = {'form': form ,
                'site_info': site_info}
