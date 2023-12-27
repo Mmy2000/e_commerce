@@ -10,6 +10,7 @@ from django.template.loader import render_to_string
 from django.http import HttpResponse, JsonResponse
 from django.utils import timezone
 from django.urls import reverse
+from django.contrib import messages
 
 
 # Create your views here.
@@ -74,6 +75,9 @@ def place_order(request, total=0, quantity=0,):
                 'grand_total': grand_total,
             }
             return render(request, 'payment.html', context)
+        else:
+             messages.error(request, 'Pls, Add your Delivery info!')
+             return redirect(reverse('carts:checkout'))
     else:
         return redirect(reverse('carts:checkout'))
     
