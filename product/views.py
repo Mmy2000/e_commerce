@@ -128,6 +128,7 @@ def search(request):
             for position in query:
                 item = {
                     'id' : position.id,
+                    'slug' : position.slug,
                     'name' : position.name,
                     'price' : position.price,
                     'image' : str(position.image.url)
