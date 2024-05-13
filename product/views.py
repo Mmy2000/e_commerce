@@ -119,9 +119,25 @@ def is_ajax(request):
 def search(request):
     if is_ajax(request=request):
         product = request.POST.get('product')
-        print(product)
+        res = None
+        # print(product)
+        query = Product.objects.filter(name__icontains=product)
+        # print(query)
+        if len(query) > 0 and len(product) > 0:
+            data = []
+            for position in query:
+                item = {
+                    'id' : position.id,
+                    'name' : position.name,
+                    'price' : position.price,
+                    'image' : str(position.image.url)
+                }
+                data.append(item)
+            res = data
+        else:
+            res = 'No Products Found ...'
 
-        return JsonResponse({'data':product})
+        return JsonResponse({'data':res})
     return JsonResponse({})
 
 
