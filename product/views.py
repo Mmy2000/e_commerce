@@ -112,6 +112,17 @@ class Search(ListView):
             Q(name__icontains = q) |
             Q(description__icontains = q))        
         return object_list
+    
+def is_ajax(request):
+    return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
+
+def search(request):
+    if is_ajax(request=request):
+        product = request.POST.get('product')
+        print(product)
+
+        return JsonResponse({'data':product})
+    return JsonResponse({})
 
 
 class ProductByCategory(ListView):

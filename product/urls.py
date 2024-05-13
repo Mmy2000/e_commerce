@@ -11,6 +11,7 @@ urlpatterns = [
     path('orderd_by_price/',views.product_list_orderd_by_price , name='product_list_orderd_by_price'),
     path('orderd_by_highest price/',views.product_list_orderd_by_price2 , name='product_list_orderd_by_price2'),
     path('search/' , views.Search.as_view() , name = 'search'),
+    path('result/' , views.search , name = 'result'),
     path('<slug:product_slug>/',views.product_detail ,name='product_detail'),
     path('<int:id>/like_or_dislike',views.like_or_unlike , name='like'),
     path('category/<int:id>/' , views.ProductByCategory.as_view() , name='product_by_category'),
