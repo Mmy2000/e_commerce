@@ -16,7 +16,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='product/')
     stock = models.IntegerField()
     price = models.IntegerField(default=0)
-    discount = models.IntegerField(default=0)
+    discount = models.FloatField(_(""))
     description = models.TextField(max_length=10000)
     like = models.ManyToManyField(User , blank=True,related_name='product_favourite')
     created_at = models.DateTimeField( default=timezone.now)
