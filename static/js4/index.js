@@ -16,6 +16,7 @@ const sendData = (product)=>{
             console.log(res.data);
             const data = res.data
             if (Array.isArray(data)) {
+                results.innerHTML = ``
                 data.forEach(product=>{
                     results.innerHTML += `
                         <a href="${url}${product.slug}" class="text-decoration-none">
